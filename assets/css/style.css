@@ -1,0 +1,22 @@
+/* * {
+  box-sizing: border-box;
+  --background-color-primary: rgb(52, 52, 52);
+  --background-color-secondary: rgb(43, 43, 43);
+  --color-primary: rgb(221, 221, 221);
+  --color-secondary: rgb(190, 190, 190);
+  --highlight-primary: rgb(0, 101, 114);
+}
+
+html,
+body {
+  background-color: var(--background-color-primary);
+  color: var(--color-primary);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: var(--background-color-secondary);
+  color: var(--color-secondary);
+} */

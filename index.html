@@ -4,11 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css"
-      crossorigin="anonymous"
-    />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Room 4 Activities</title>
   </head>
@@ -18,31 +13,63 @@
       <img src="https://placehold.co/600x400">
     </header>
     <main>
-        <form>
-          <div class="row">
-            <div class="small-12 medium-2 columns">
-              <label>
-                <input type="text" placeholder="From">
-              </label>
-            </div>
-            <div class="small-12 medium-2 columns">
-              <label>
-                <input type="text" placeholder="To">
-              </label>
-            </div>
-            <div class="slider" data-slider data-initial-start="50" data-end="200">
-              <span class="slider-handle"  data-slider-handle role="slider" tabindex="1"></span>
-              <span class="slider-fill" data-slider-fill></span>
-              <input type="hidden">
-            </div>
-            <input type="submit" value="submit">
-            <button class="dropdown button tiny">Dropdown Button</button>
+      <div>
+        <label class="mdc-text-field mdc-text-field--outlined">
+          <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label" id="my-label-id">Your Name</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+          </span>
+          <input type="text" class="mdc-text-field__input" aria-labelledby="my-label-id">
+        </label>
+      </div>
+
+      <div class="mdc-slider">
+        <input class="mdc-slider__input" type="range" min="0" max="100" value="50" name="volume" aria-label="Continuous slider demo">
+        <div class="mdc-slider__track">
+          <div class="mdc-slider__track--inactive"></div>
+          <div class="mdc-slider__track--active">
+            <div class="mdc-slider__track--active_fill"></div>
           </div>
-        </form>
-        <br />
-        <footer>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, nesciunt sequi numquam, cumque eum labore dolores, modi ad laudantium suscipit sit! Iure ut dicta velit ipsa quisquam cum, amet similique!
-        </footer>
+        </div>
+        <div class="mdc-slider__thumb">
+          <div class="mdc-slider__thumb-knob"></div>
+        </div>
+        <input type="submit" value="submit">
+      </div>
+
+      <div class="mdc-menu mdc-menu-surface" id="demo-menu">
+        <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+          <li>
+            <ul class="mdc-menu__selection-group">
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="mdc-list-item__graphic mdc-menu__selection-group-icon">
+                </span>
+                <span class="mdc-list-item__text">Single</span>
+              </li>
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="mdc-list-item__graphic mdc-menu__selection-group-icon">
+                </span>
+                <span class="mdc-list-item__text">1.15</span>
+              </li>
+            </ul>
+          </li>
+          <li class="mdc-list-divider" role="separator"></li>
+          <li class="mdc-list-item" role="menuitem">
+            <span class="mdc-list-item__ripple"></span>
+            <span class="mdc-list-item__text">Add space before paragraph</span>
+          </li> 
+        </ul>
+      </div>
+      
+      <br />
+      <footer>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, nesciunt sequi numquam, cumque eum labore dolores, modi ad laudantium suscipit sit! Iure ut dicta velit ipsa quisquam cum, amet similique!
+      </footer>
     </main>
   </body>
       <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
@@ -56,10 +83,6 @@
       integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY="
       crossorigin="anonymous"
     ></script>
-    <script>
-      $(document).foundation();
-    </script>
-    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
   </body>
 </html>

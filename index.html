@@ -18,21 +18,25 @@
         <p class="subtitle">Primary subtitle</p>
       </div>
     </section>
+
+    <!--TODO: center this-->
     <br />
-    <img src="http://via.placeholder.com/640x360" alt="placeholder image" />
+      <div class="container">
+        <img src="http://via.placeholder.com/640x360" alt="placeholder image" />
+      </div>
     <br />
-    <input
-      id="search"
-      class="input is-small"
-      type="text"
-      placeholder="Small input"
-    />
-    <input
-      id="zipCode"
-      class="input is-small"
-      type="text"
-      placeholder="Small input"
-    />
+
+    <!--TODO: add more criteria (like a date picker) in additional columns-->
+    <section class="columns is-centered">
+      <div class="column is-2">
+        <input id="search" class="input" type="text" placeholder="Search" />
+      </div>
+
+      <div class="column is-2">
+        <input id="zipCode" class="input" type="text" placeholder="zipCode" />
+      </div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.6.4.min.js"

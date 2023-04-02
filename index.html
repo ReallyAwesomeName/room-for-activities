@@ -4,11 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <title>Room 4 Activities</title>
   <body>
@@ -19,34 +23,61 @@
       </div>
     </section>
 
-    <!--TODO: center this-->
-    <br />
-    <div class="container">
-      <img src="http://via.placeholder.com/640x360" alt="placeholder image" />
+    <div class="container has-text-centered" style="margin-bottom: 2rem">
+      <img
+        src="http://via.placeholder.com/640x360"
+        alt="placeholder image"
+        style="width: 100%"
+      />
     </div>
-    <br />
-    <!--TODO: add more criteria (like a date picker) in additional columns-->
-    <section class="columns is-centered">
-      <div class="column is-2">
+    <!--TODO: add date picker - vertically center radius input-->
+    <section class="field is-grouped is-grouped-centered is-grouped-multiline">
+      <div class="control">
         <input id="search" class="input" type="text" placeholder="Search" />
       </div>
 
-      <div class="column is-2">
+      <div class="control">
         <input id="zipCode" class="input" type="text" placeholder="zipCode" />
       </div>
-    </section>
 
-    <div class="slidecontainer">
-      <input
-        style="width: 100px"
-        type="range"
-        min="1"
-        max="100"
-        value="50"
-        class="slider"
-        id="myRange"
-      />
-    </div>
+      <div class="control">
+        <input
+          type="text"
+          class="input"
+          id="datepicker"
+          style="max-width: 8rem"
+          placeholder="Date"
+        />
+      </div>
+
+      <div class="control">
+        <input
+          class="input"
+          style="width: 9rem"
+          type="number"
+          min="1"
+          max="500"
+          id="myRadius"
+          placeholder="Radius (miles)"
+        />
+      </div>
+
+      <div class="control">
+        <button class="button is-primary is-rounded">Search</button>
+      </div>
+      
+      <!-- <div class="slidecontainer column is-2">
+        <input
+          style="width: 100px"
+          type="range"
+          min="1"
+          max="100"
+          value="50"
+          class="slider"
+          id="myRadius"
+        />
+      </div> -->
+    </section>
     <footer class="footer">
       <div class="content has-text-centered">
         <p>Brandon, Jason, Tyler, Greivin, and Austin Worked on this</p>

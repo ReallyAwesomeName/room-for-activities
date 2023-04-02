@@ -19,6 +19,7 @@ div.columns, input.input {
   color: var(--color-primary);
 } */
 
+/* source: w3schools https://www.w3schools.com/howto/howto_js_rangeslider.asp */
 .slidecontainer {
   width: 100px; /* Width of the outside container */
 }
@@ -58,6 +59,10 @@ div.columns, input.input {
   background: #04aa6d; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
+/* end w3schools slider style */
+
+/* NOTE: none of these tab styles are being used */
+/*
 .tabbed-search {
   background: none;
   border: none;
@@ -165,4 +170,4 @@ div.columns, input.input {
 
 .tabs-title > a {
   padding: 1em 1.25em;
-}
+} */

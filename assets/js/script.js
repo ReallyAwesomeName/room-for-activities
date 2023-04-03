@@ -7,8 +7,8 @@
 // TODO: save data to local storage
 // TODO: create a "recent searches" list
 
-const apiKey = "4g4wrjxnxvv3mz2q3w7menj";
-const apiUrl = "http://api.amp.active.com/v2/search?query=running&category=event&start_date=2013-07-04..&near=San%20Diego,CA,US&radius=50&api_key=sqq35zvx6a8rgmxhy9csm8qj"
+const apiKey = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
+const apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT"
 
 fetch(apiUrl)
   .then(response => response.json())

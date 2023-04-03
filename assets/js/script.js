@@ -7,10 +7,10 @@
 // TODO: save data to local storage
 // TODO: create a "recent searches" list
 
-fetch(apiUrl)
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.error(error));
+// fetch(apiUrl)
+//   .then((response) => response.json())
+//   .then((data) => console.log(data))
+//   .catch((error) => console.error(error));
 
 $(function () {
   $("#datepickerFrom").datepicker();

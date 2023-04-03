@@ -1,6 +1,11 @@
+// TODO: read user input
+// TODO: validate user input
+// TODO: get data from API
+// TODO: create div for displaying data
+// TODO: display data
+// TODO: save data to local storage
+// TODO: create a "recent searches" list
 
-// Update the current slider value (each time you drag the slider handle)
-
-$( function() {
-  $( "#datepicker" ).datepicker();
-} );
+$(function () {
+  $("#datepicker").datepicker();
+});

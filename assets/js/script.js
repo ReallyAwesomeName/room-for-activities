@@ -7,10 +7,8 @@
 // TODO: save data to local storage
 // TODO: create a "recent searches" list
 
-// fetch(apiUrl)
-//   .then((response) => response.json())
-//   .then((data) => console.log(data))
-//   .catch((error) => console.error(error));
+const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
+const url1 = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT"
 
 $(function () {
   $("#datepickerFrom").datepicker();

@@ -18,3 +18,6 @@ div.columns, input.input {
   background-color: var(--background-color-primary);
   color: var(--color-primary);
 } */
+body {
+  background-color: darkgray;
+}

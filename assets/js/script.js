@@ -12,7 +12,7 @@
 2. user clicks search button:
     validate user input
     retrieve validated search options
-      getValues()
+      getValues() (called by getEvents())
     build ticketmaster api request url
 	  call api with query parameters to recieve user-requested data
       getEvents()
@@ -34,7 +34,6 @@
 */
 
 const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
-const apiKey2 ="AIzaSyBWKK5qEUakiyLagiIyKIw53IqPDoaqnsU"
 // const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`
 // TODO: update hrefs - maybe make them buttons instead of links
 // TODO: maybe re-style with bulma?
@@ -48,26 +47,36 @@ const eventDisplayPanel = `
     </div>
     <div class="panel-body">
       <div id="events" class="list-group">
-        <a href="#" class="list-group-item">
+      
+        <div class="list-group-item">
           <h4 class="list-group-item-heading">Event title</h4>
           <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p class="venue"></p>
-        </a>
-        <button id="btn-1" class="button">See More!</button>
+          <button id="btn-1" class="button">See More!</button>
+        </div>
+        
+        <div class="list-group-item">  
           <h4 class="list-group-item-heading">Event title</h4>
           <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p class="venue"></p>
-        </a>
-        <button id="btn-2" class="button">See More!</button>
+          <button id="btn-2" class="button">See More!</button>
+        </div>
+          
+        <div href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">Event title</h4>
+          <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p class="venue"></p>
+          <button id="btn-3" class="button">See More!</button>
+        </div>
+
+        <div href="#" class="list-group-item">
           <h4 class="list-group-item-heading">Event title</h4>
           <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p class="venue"></p>
-        </a>
-        <button id="btn-3" class="button">See More!</button>
-          <h4 class="list-group-item-heading">Event title</h4>
-          <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p class="venue"></p>
-        </a>
+          <button id="btn-4" class="button">See More!</button>
+        </div>
+
+
       </div>
     </div>
     <div class="panel-footer">
@@ -105,9 +114,8 @@ $(function () {
 // click event for search button
 $("#btnSearch").on("click", function (event) {
   event.preventDefault();
-  var values = getEvents();
   // call api to get data using values
-  $("body").append(eventDisplayPanel);
+  var values = getEvents();
 });
 
 // get values from the form
@@ -168,9 +176,6 @@ function getEvents(page = 0) {
   let queryUrl =
     `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&dmaId=200&size=4&page=` +
     page;
-
-  // TODO: define buildUrl()
-  // queryUrl = buildUrl();
 
   $.ajax({
     type: "GET",

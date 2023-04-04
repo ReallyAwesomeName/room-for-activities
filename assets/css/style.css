@@ -19,5 +19,12 @@ div.columns, input.input {
   color: var(--color-primary);
 } */
 body {
-  background-color: darkgray;
+  background-color: black;
 }
+
+p {
+  font-size: 1em;
+  font-family: 'Alegreya Sans SC', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
+}
+

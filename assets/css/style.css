@@ -22,9 +22,8 @@ body {
   background-color: black;
 }
 
-p {
+header p {
   font-size: 1em;
-  font-family: 'Alegreya Sans SC', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Alegreya Sans SC", Calibri, "Trebuchet MS", sans-serif;
   color: white;
 }
-

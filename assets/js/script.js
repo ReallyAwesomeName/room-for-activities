@@ -35,7 +35,6 @@
 
 const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
 // const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`
-// TODO: update hrefs - maybe make them buttons instead of links
 // TODO: maybe re-style with bulma?
 const eventDisplayPanel = `
 <div class="container">
@@ -47,7 +46,7 @@ const eventDisplayPanel = `
     </div>
     <div class="panel-body">
       <div id="events" class="list-group">
-      
+
         <div class="list-group-item">
           <h4 class="list-group-item-heading">Event title</h4>
           <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -76,7 +75,6 @@ const eventDisplayPanel = `
           <button id="btn-4" class="button">See More!</button>
         </div>
 
-
       </div>
     </div>
     <div class="panel-footer">
@@ -89,16 +87,7 @@ const eventDisplayPanel = `
     </div>
   </div>
   
-  <div id='attraction-panel' class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Attraction</h3>
-    </div>
-    <div id="attraction" class="panel-body">
-      <h4 class="list-group-item-heading">Attraction title</h4>
-      <img class="col-xs-12" src="">
-      <p id="classification"></p>
-    </div>
-  </div>
+
   </div>
 </div>
 </div>
@@ -217,63 +206,17 @@ function showEvents(json) {
     item.off("click");
     item.click(events[i], function (eventObject) {
       console.log(eventObject.data);
-      try {
-        getAttraction(eventObject.data._embedded.attractions[0].id);
-      } catch (err) {
-        console.log(err);
-      }
+      // try {
+      //   getAttraction(eventObject.data._embedded.attractions[0].id);
+      // } catch (err) {
+      //   console.log(err);
+      // }
     });
     item = item.next();
   }
 }
 
-// TODO: remove these buttons? instead just display one big list?
-$("#prev").click(function () {
-  getEvents(--page);
-});
-
-$("#next").click(function () {
-  getEvents(++page);
-});
-
-function getAttraction(id) {
-  $.ajax({
-    type: "GET",
-    url:
-      "https://app.ticketmaster.com/discovery/v2/attractions/" +
-      id +
-      ".json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG",
-    async: true,
-    dataType: "json",
-    success: function (json) {
-      showAttraction(json);
-    },
-    error: function (xhr, status, err) {
-      console.log(err);
-    },
-  });
-}
-
-function showAttraction(json) {
-  $("#events-panel").hide();
-  $("#attraction-panel").show();
-
-  $("#attraction-panel").click(function () {
-    getEvents(page);
-  });
-
-  $("#attraction .list-group-item-heading").first().text(json.name);
-  $("#attraction img").first().attr("src", json.images[0].url);
-  $("#classification").text(
-    json.classifications[0].segment.name +
-      " - " +
-      json.classifications[0].genre.name +
-      " - " +
-      json.classifications[0].subGenre.name
-  );
-}
-
-//I want to be able to clear my search from the clear button
+// I want to be able to clear my search from the clear button
 $("#btnClear").click(function () {
   $("#search").val("");
 });
@@ -286,10 +229,6 @@ $("#btnSearch").click(function () {
 $("#btnClear").click(function () {
   clearResults();
 });
-
-
-
-
 
 function clearResults() {
   // TODO: function to clear previous search results from page upon repeated search

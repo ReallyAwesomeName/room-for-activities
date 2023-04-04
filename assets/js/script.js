@@ -268,6 +268,24 @@ function showAttraction(json) {
   );
 }
 
+//I want to be able to clear my search from the clear button
+$("#btnClear").click(function () {
+  $("#search").val("");
+});
+
+//
+$("#btnSearch").click(function () {
+  getEvents();
+});
+
+$("#btnClear").click(function () {
+  clearResults();
+});
+
+
+
+
+
 function clearResults() {
   // TODO: function to clear previous search results from page upon repeated search
   // TODO: returns nothing

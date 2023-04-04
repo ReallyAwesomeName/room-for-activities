@@ -52,17 +52,17 @@ const eventDisplayPanel = `
           <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p class="venue"></p>
         </a>
-        <a href="#" class="list-group-item">
+        <button id="btn-1" class="button">See More!</button>
           <h4 class="list-group-item-heading">Event title</h4>
           <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p class="venue"></p>
         </a>
-        <a href="#" class="list-group-item">
+        <button id="btn-2" class="button">See More!</button>
           <h4 class="list-group-item-heading">Event title</h4>
           <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p class="venue"></p>
         </a>
-        <a href="#" class="list-group-item">
+        <button id="btn-3" class="button">See More!</button>
           <h4 class="list-group-item-heading">Event title</h4>
           <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p class="venue"></p>

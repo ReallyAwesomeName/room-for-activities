@@ -36,75 +36,86 @@
         <p class="subtitle">Primary subtitle</p>
       </div>
     </section>
-
-    <div class="headerImage" style="display:inline-flex">
-      <img id="header1"
-        src="assets\images\concert1.jpg"
-        alt="concert"
-        style="width: 25%"
-      />
-      <img id= "header2"
-        src="assets\images\sport1.jpg"
-        alt="sports-event"
-        style="width: 25%"
+    <main>
+      <div class="headerImage" style="display: inline-flex">
+        <img
+          id="header1"
+          src="assets\images\concert1.jpg"
+          alt="concert"
+          style="width: 25%"
         />
-      <img id="header3"
-        src= "assets\images\standup.jpg"  
-        alt="standup-comedy"
-        style="width: 25%"
+        <img
+          id="header2"
+          src="assets\images\sport1.jpg"
+          alt="sports-event"
+          style="width: 25%"
         />
-      <img id="header4"
-        src="assets\images\theater.jpg"
-        alt="theater-venue"
-        style="width: 25%"
+        <img
+          id="header3"
+          src="assets\images\standup.jpg"
+          alt="standup-comedy"
+          style="width: 25%"
         />
-    </div>
-
-    <section class="field is-grouped is-grouped-centered is-grouped-multiline">
-      <div class="control">
-        <input id="search" class="input" type="text" placeholder="Search" />
-      </div>
-
-      <div class="control">
-        <input id="zipCode" class="input" type="text" placeholder="zipCode" />
-      </div>
-
-      <div class="control">
-        <input
-          class="input"
-          style="width: 9rem"
-          type="number"
-          min="1"
-          max="500"
-          id="myRadius"
-          placeholder="Radius (miles)"
+        <img
+          id="header4"
+          src="assets\images\theater.jpg"
+          alt="theater-venue"
+          style="width: 25%"
         />
       </div>
 
-      <div class="control">
-        <input
-          type="text"
-          class="input"
-          id="datepickerFrom"
-          style="max-width: 8rem"
-          placeholder="from date"
-        />
+      <section
+        class="field is-grouped is-grouped-centered is-grouped-multiline"
+      >
+        <div class="control">
+          <input id="search" class="input" type="text" placeholder="Search" />
+        </div>
+
+        <div class="control">
+          <input id="zipCode" class="input" type="text" placeholder="zipCode" />
+        </div>
+
+        <div class="control">
+          <input
+            class="input"
+            style="width: 9rem"
+            type="number"
+            min="1"
+            max="500"
+            id="myRadius"
+            placeholder="Radius (miles)"
+          />
+        </div>
+
+        <div class="control">
+          <input
+            type="text"
+            class="input"
+            id="datepickerFrom"
+            style="max-width: 8rem"
+            placeholder="from date"
+          />
+        </div>
+        <div class="control">
+          <input
+            type="text"
+            class="input"
+            id="datepickerUntil"
+            style="max-width: 8rem"
+            placeholder="until date"
+          />
+        </div>
+      </section>
+      <div class="container has-text-centered">
+        <button
+          class="button is-primary is-rounded"
+          id="btnSearch"
+          style="margin: 1rem"
+        >
+          Search
+        </button>
       </div>
-      <div class="control">
-        <input
-          type="text"
-          class="input"
-          id="datepickerUntil"
-          style="max-width: 8rem"
-          placeholder="until date"
-        />
-      </div>
-    </section>
-    <div class="container has-text-centered">
-      <button class="button is-primary is-rounded" id="btnSearch">
-        Search
-      </button>
-    </div>
+    </main>
     <footer class="footer">
       <div class="content has-text-centered">
         <p>Brandon, Jason, Tyler, Greivin, and Austin Worked on this</p>

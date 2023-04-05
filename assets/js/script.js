@@ -103,14 +103,25 @@ $("#btnSearch").on("click", function (event) {
   $(eventDisplayPanel).appendTo("main");
 });
 
-// I want to be able to clear my search from the clear button
-$("#btnClear").click(function () {
-  $("#search").val("");
+//"Clear" button element by its ID
+const clearBtn = document.getElementById('btnAdd');
+
+//Input field that needs to be cleared
+const searchBox = document.getElementById('search');
+const zipCode = document.getElementById('zipCode');
+const radius = document.getElementById('myRadius');
+const datepickerFrom = document.getElementById('datepickerFrom');
+const datepickerUntil = document.getElementById('datepickerUntil');
+
+clearBtn.addEventListener('click', () => {
+  //Clears the input fields' values
+  searchBox.value = '';
+  zipCode.value = '';
+  radius.value = '';
+  datepickerFrom.value = '';
+  datepickerUntil.value = '';
 });
 
-$("#btnClear").click(function () {
-  clearResults();
-});
 
 // get values from the form
 // return json with (element id, value) pairs

@@ -10,6 +10,9 @@
 /* NOTE: rough outline of application flow:
 1. user enters search options
 2. user clicks search button:
+    all currently presented events are cleared from the viewport
+    if map is present, it is also cleared from the viewport
+      clearResults()
     validate user input
     retrieve validated search options
       getValues() (called by getEvents())
@@ -27,10 +30,7 @@
 	
 	4. user makes another search query:
 		  all currently presented events are saved to local storage
-		  all currently presented events are cleared from the viewport
-      if map is present, it is cleared from the viewport
-        clearResults()
-		  return to 2
+      return to 2
 */
 
 const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
@@ -38,58 +38,49 @@ const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
 // TODO: maybe re-style with bulma?
 const eventDisplayPanel = `
 <div class="container">
-<div class="row">
-  <div class="col-xs-6">
-  <div id='events-panel' class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Events</h3>
-    </div>
-    <div class="panel-body">
-      <div id="events" class="list-group">
+  <div class="row">
+    <div class="col-xs-6">
+      <div id='events-panel' class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Events</h3>
+        </div>
+        <div class="panel-body">
+          <div id="events" class="list-group">
 
-        <div class="list-group-item">
-          <h4 class="list-group-item-heading">Event title</h4>
-          <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p class="venue"></p>
-          <button id="btn-1" class="button">See More!</button>
-        </div>
-        
-        <div class="list-group-item">  
-          <h4 class="list-group-item-heading">Event title</h4>
-          <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p class="venue"></p>
-          <button id="btn-2" class="button">See More!</button>
-        </div>
-          
-        <div href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">Event title</h4>
-          <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p class="venue"></p>
-          <button id="btn-3" class="button">See More!</button>
-        </div>
+            <div class="list-group-item">
+              <h4 class="list-group-item-heading">Event title</h4>
+              <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p class="venue"></p>
+              <button id="btn-1" class="button">See More!</button>
+            </div>
+            
+            <div class="list-group-item">  
+              <h4 class="list-group-item-heading">Event title</h4>
+              <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p class="venue"></p>
+              <button id="btn-2" class="button">See More!</button>
+            </div>
+              
+            <div href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event title</h4>
+              <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p class="venue"></p>
+              <button id="btn-3" class="button">See More!</button>
+            </div>
 
-        <div href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">Event title</h4>
-          <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p class="venue"></p>
-          <button id="btn-4" class="button">See More!</button>
+            <div href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Event title</h4>
+              <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p class="venue"></p>
+              <button id="btn-4" class="button">See More!</button>
+            </div>
+
+          </div>
         </div>
 
       </div>
     </div>
-    <div class="panel-footer">
-      <nav>
-        <ul class="pager">
-          <li id="prev" class="previous"><a href="#"><span aria-hidden="true">&larr;</span></a></li>
-          <li id="next" class="next"><a href="#"><span aria-hidden="true">&rarr;</span></a></li>
-        </ul>
-      </nav>
-    </div>
   </div>
-  
-
-  </div>
-</div>
 </div>
 `;
 
@@ -100,11 +91,25 @@ $(function () {
   $("#datepickerUntil").datepicker();
 });
 
-// click event for search button
+// NOTE: search click function is essentially the driver code
+// buttons
 $("#btnSearch").on("click", function (event) {
   event.preventDefault();
+  // clear output areas incase they made a search previously
+  clearResults();
   // call api to get data using values
   var values = getEvents();
+  // display results
+  $(eventDisplayPanel).appendTo("main");
+});
+
+// I want to be able to clear my search from the clear button
+$("#btnClear").click(function () {
+  $("#search").val("");
+});
+
+$("#btnClear").click(function () {
+  clearResults();
 });
 
 // get values from the form
@@ -129,9 +134,9 @@ function getValues() {
 function getEvents(page = 0) {
   // parameter json to add to queryUrl as needed
   let userParams = getValues();
-  $(eventDisplayPanel).appendTo("main");
-  $("#events-panel").show();
-  $("#attraction-panel").hide();
+
+  // $("#events-panel").show();
+  // $("#attraction-panel").hide();
 
   if (page < 0) {
     page = 0;
@@ -143,9 +148,9 @@ function getEvents(page = 0) {
     }
   }
 
-  // TODO: iterate entered parameters and add to request url (remember & before each)
   // DEBUG: entering a zipCode results in "TypeError: json._embedded is undefined"
   // DEBUG: pointing to reference in showEvents()
+  // iterate entered parameters and add to request url (remember & before each)
   var queryParams = "";
   for (const [key, value] of Object.entries(userParams)) {
     console.log(key, value);
@@ -216,24 +221,12 @@ function showEvents(json) {
   }
 }
 
-// I want to be able to clear my search from the clear button
-$("#btnClear").click(function () {
-  $("#search").val("");
-});
-
-//
-$("#btnSearch").click(function () {
-  getEvents();
-});
-
-$("#btnClear").click(function () {
-  clearResults();
-});
-
 function clearResults() {
   // TODO: function to clear previous search results from page upon repeated search
   // TODO: returns nothing
-  // TODO: must save previous results to local storage before clearing
+  // TODO: ensure this works even when there is nothing displayed
+  // TODO:    (this is called first thing when user clicks search button)
+  // TODO: must save previous results (if any) to local storage before clearing
 }
 
 function showRecentSearches() {

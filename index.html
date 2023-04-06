@@ -31,168 +31,169 @@
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <script
-     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWKK5qEUakiyLagiIyKIw53IqPDoaqnsU">
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWKK5qEUakiyLagiIyKIw53IqPDoaqnsU&callback">
     </script>
 
   </head>
   <title>Sights & Sounds</title>
   <body>
     <section
-      class="hero is-primary"
-      style="
+    class="hero is-primary"
+    style="
         background-color: #000000;
         background-image: linear-gradient(326deg, #000000 0%, #ce203c 74%);
-      "
+        "
     >
-      <div class="hero-body" style="text-align: center">
-        <p class="title">Sights & Sounds</p>
-        <!-- TODO: don't forget this placeholder -->
-        <p class="subtitle">
-          A comprehensive search tool to find events in any area!
-        </p>
-      </div>
-    </section>
-    <main class="container">
-      <div class="headerImage" style="display: inline-flex">
-        <img
-          id="header1"
-          src="assets\images\concert1.jpg"
-          alt="concert"
-          style="width: 25%"
-        />
-        <img
-          id="header2"
-          src="assets\images\sport1.jpg"
-          alt="sports-event"
-          style="width: 25%"
-        />
-        <img
-          id="header3"
-          src="assets\images\standup.jpg"
-          alt="standup-comedy"
-          style="width: 25%"
-        />
-        <img
-          id="header4"
-          src="assets\images\theater.jpg"
-          alt="theater-venue"
-          style="width: 25%"
-        />
-      </div>
-
-      <section
-        class="field is-grouped is-grouped-centered is-grouped-multiline"
-      >
-        <div class="control">
-          <input id="search" class="input" type="text" placeholder="Search" list="previousSearches"/>
-          <datalist id="previousSearches">
-
-          </datalist>
-        </div>
-
-        <div class="control">
-          <input id="zipCode" class="input" type="text" placeholder="zipCode" />
-        </div>
-<!--- Original Radius selector
-        <div class="control">
-          <input
-            class="input"
-            style="width: 9rem"
-            type="number"
-            min="1"
-            max="500"
-            id="myRadius"
-            placeholder="Radius (miles)"
-          />
-        </div>
-       **Radius Slider**
+    <div class="hero-body" style="text-align: center">
+      <p class="title">Sights & Sounds</p>
+      <!-- TODO: don't forget this placeholder -->
+      <p class="subtitle">
+        A comprehensive search tool to find events in any area!
+      </p>
+    </div>
+  </section>
+  <main class="container">
+    <div class="headerImage" style="display: inline-flex">
+      <img
+      id="header1"
+      src="assets\images\concert1.jpg"
+      alt="concert"
+      style="width: 25%"
+      />
+      <img
+      id="header2"
+      src="assets\images\sport1.jpg"
+      alt="sports-event"
+      style="width: 25%"
+      />
+      <img
+      id="header3"
+      src="assets\images\standup.jpg"
+      alt="standup-comedy"
+      style="width: 25%"
+      />
+      <img
+      id="header4"
+      src="assets\images\theater.jpg"
+      alt="theater-venue"
+      style="width: 25%"
+      />
+    </div>
+    
+    <section
+    class="field is-grouped is-grouped-centered is-grouped-multiline"
+    >
+    <div class="control">
+      <input id="search" class="input" type="text" placeholder="Search" list="previousSearches"/>
+      <datalist id="previousSearches">
+        
+      </datalist>
+    </div>
+    
+    <div class="control">
+      <input id="zipCode" class="input" type="text" placeholder="zipCode" />
+    </div>
+    <!--- Original Radius selector
       <div class="control">
         <input
-          class="input"
-          style="width: 9rem"
-          type="range"
-          min="1"
-          max="200"
-          id="myRadius"
-          value="100"
-          oninput="updateRadiusLabel()"
+        class="input"
+        style="width: 9rem"
+        type="number"
+        min="1"
+        max="500"
+        id="myRadius"
+        placeholder="Radius (miles)"
         />
-        <span id="radiusLabel"></span>
-      -->
+      </div>
+       **Radius Slider**
+       <div class="control">
+         <input
+         class="input"
+         style="width: 9rem"
+         type="range"
+         min="1"
+         max="200"
+         id="myRadius"
+         value="100"
+         oninput="updateRadiusLabel()"
+         />
+         <span id="radiusLabel"></span>
+        -->
+        <div class="control">
+          <label for="Radius" id="radiusMiles">Radius:</label>
+          <select class="select" style="width: 9rem" id="myRadius" >
+            <option value="1">1 mile</option>
+            <option value="5">5 miles</option>
+            <option value="10">10 miles</option>
+            <option value="25" selected>25 miles</option>
+            <option value="50">50 miles</option>
+            <option value="100">100 miles</option>
+            <option value="250">250 miles</option>
+            <option value="500">500 miles</option>
+            <option value="600">600 miles</option>
+            <option value="700">700 miles</option>
+            <option value="800">800 miles</option>
+            <option value="900">900 miles</option>
+            <option value="1,000">1,000 miles</option>
+            <option value="1,500">1,500 miles</option>
+            <option value="2,000">2,000 miles</option>
+          </select>
+        </div>
+      </div>
       <div class="control">
-        <label for="Radius" id="radiusMiles">Radius:</label>
-        <select class="select" style="width: 9rem" id="myRadius" >
-          <option value="1">1 mile</option>
-          <option value="5">5 miles</option>
-          <option value="10">10 miles</option>
-          <option value="25" selected>25 miles</option>
-          <option value="50">50 miles</option>
-          <option value="100">100 miles</option>
-          <option value="250">250 miles</option>
-          <option value="500">500 miles</option>
-          <option value="600">600 miles</option>
-          <option value="700">700 miles</option>
-          <option value="800">800 miles</option>
-          <option value="900">900 miles</option>
-          <option value="1,000">1,000 miles</option>
-          <option value="1,500">1,500 miles</option>
-          <option value="2,000">2,000 miles</option>
-        </select>
+        <input
+        type="text"
+        class="input"
+        id="datepickerFrom"
+        style="max-width: 8rem"
+        placeholder="from date"
+        />
       </div>
+      <div class="control">
+        <input
+        type="text"
+        class="input"
+        id="datepickerUntil"
+        style="max-width: 8rem"
+        placeholder="until date"
+        />
       </div>
-        <div class="control">
-          <input
-            type="text"
-            class="input"
-            id="datepickerFrom"
-            style="max-width: 8rem"
-            placeholder="from date"
-          />
-        </div>
-        <div class="control">
-          <input
-            type="text"
-            class="input"
-            id="datepickerUntil"
-            style="max-width: 8rem"
-            placeholder="until date"
-          />
-        </div>
-      </section>
-      <div class="container has-text-centered">
-        <button
-          class="button is-primary is-rounded"
-          id="btnSearch"
-          style="margin: 1rem"
-        >
-          Search
-        </button>
-        <button
-          class="button is-primary is-rounded"
-          id="btnAdd"
-          style="margin: 1rem"
-        >
-          Clear
-        </button>
-      </div>
-      <section id="results" style="display: grid; grid-template-columns: 1fr 1fr;">
-        <iframe
-          class="box containerLeft"
-          id="map"
-          width="600"
-          height="450"
-          style="border: 0;"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
-        &q=,Westville+NJ"
-        >
-        </iframe>
-      </section>
-      <!--create a clear button -->
-    </main>
-    <footer
+    </section>
+    <div class="container has-text-centered">
+      <button
+      class="button is-primary is-rounded"
+      id="btnSearch"
+      style="margin: 1rem"
+      >
+      Search
+    </button>
+    <button
+    class="button is-primary is-rounded"
+    id="btnAdd"
+    style="margin: 1rem"
+    >
+    Clear
+  </button>
+</div>
+<section id="results" style="display: grid; grid-template-columns: 1fr 1fr;">
+  <!-- <iframe
+    class="box containerLeft"
+    id="map"
+    width="600"
+    height="450"
+    style="border: 0;"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
+    &q=,Westville+NJ"
+    >
+  </iframe> -->
+</section>
+<!--create a clear button -->
+</main>
+<div id="map" style="height: 400px; width: 400px;"></div>
+<footer
       class="footer"
       style="
         background-color: #000000;
@@ -207,17 +208,18 @@
         </p>
         <p>Brandon, Jason, Tyler, Greivin, and Austin Worked on this</p>
       </div>
+      <button onclick="window.location.href='maps.googleapis.com/maps/api/js?key=AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ&callback';"></button>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script
-      src="https://code.jquery.com/jquery-3.6.4.min.js"
-      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
-      crossorigin="anonymous"
+    src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+    crossorigin="anonymous"
     ></script>
     <script
-      src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
-      integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY="
-      crossorigin="anonymous"
+    src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+    integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY="
+    crossorigin="anonymous"
     ></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
   </body>

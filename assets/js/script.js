@@ -39,7 +39,7 @@ const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
 const eventDisplayPanel = `
 <div class="container">
   <div class="row">
-    <div>
+    <div class="col-xs-6">
       <div id='events-panel' class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Events</h3>
@@ -85,19 +85,11 @@ const eventDisplayPanel = `
 `;
 
 const mapDisplayPanel = `
-<iframe
-  width="600"
-  height="450"
-  style="border:0"
-  loading="lazy"
-  allowfullscreen
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
-    &q=,Westville+NJ">
-</iframe>
-`
-
-
+<div>
+  <p id="location">location there</p>
+  <div id="map"></div>
+  <div id="events"></div>
+</div>`;
 
 $(function () {
   $("#datepickerFrom").datepicker();
@@ -115,12 +107,7 @@ $("#btnSearch").on("click", function (event) {
   // call api to get data using values
   var values = getEvents();
   // display results
-  $(eventDisplayPanel).prependTo("#results");
-});
-
-$("#btn-1").on("click", function (event) {
-  event.preventDefault();
-  $("#map").show();
+  $(eventDisplayPanel).appendTo("main");
 });
 
 //"Clear" button element by its ID
@@ -178,6 +165,8 @@ function getEvents(page = 0) {
     }
   }
 
+  // DEBUG: entering a zipCode results in "TypeError: json._embedded is undefined"
+  // DEBUG: pointing to reference in showEvents()
   // iterate entered parameters and add to request url (remember & before each)
   var queryParams = "";
   for (const [key, value] of Object.entries(userParams)) {
@@ -185,22 +174,18 @@ function getEvents(page = 0) {
     if (key === "search" && value !== "") {
       queryParams += `&keyword=${value}`;
     } else if (key === "zipCode" && value !== "") {
-      queryParams += `&stateCode=${value}`;}
-      // else if (key === "myRadius" && value !== "") {
-    //   // DEBUG: radius does not seem to work - maybe will with geoPoint?
-    //   queryParams += `&radius=${value}`;
-    // }
+      queryParams += `&postalCode=${value}`;
+    } else if (key === "myRadius" && value !== "") {
+      queryParams += `&radius=${value}`;
+    }
     // NOTE: datepicker value is json w/ from and until keys
     // TODO: implement date range selection
     //   else if (key === "datepicker" && value) {
     //   }
   }
 
-  // var queryUrl =
-  //   `https://app.ticketmaster.com/discovery/v2/events.json?apikey=GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT&keyword=trans&countryCode=US&stateCode=NY&radius=50&page=` +
-  //   page;
-  var queryUrl =
-    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&countryCode=US&page=` +
+  let queryUrl =
+    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&dmaId=200&size=4&page=` +
     page;
 
   $.ajax({
@@ -213,7 +198,7 @@ function getEvents(page = 0) {
       showEvents(json);
     },
     error: function (xhr, status, err) {
-      console.log(`Failed to get events: ${err}`);
+      console.log(err);
     },
   });
 }
@@ -260,6 +245,13 @@ const apiKey2 = "AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg";
 
 // append the image element to the map display panel
 $(mapDisplayPanel).append(img);
+
+//Radius slider 
+function updateRadiusLabel() {
+  var radius = document.getElementById("myRadius").value;
+  var label = document.getElementById("radiusLabel");
+  label.innerHTML = radius + " miles";
+}
 
 function clearResults() {
   // TODO: function to clear previous search results from page upon repeated search

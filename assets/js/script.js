@@ -246,12 +246,12 @@ const apiKey2 = "AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg";
 // append the image element to the map display panel
 $(mapDisplayPanel).append(img);
 
-//Radius slider 
+/* Radius Slider
 function updateRadiusLabel() {
   var radius = document.getElementById("myRadius").value;
   var label = document.getElementById("radiusLabel");
   label.innerHTML = radius + " miles";
-}
+}*/
 
 function clearResults() {
   // TODO: function to clear previous search results from page upon repeated search

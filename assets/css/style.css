@@ -28,7 +28,7 @@ body {
   font-family: "Alegreya Sans SC", Calibri, "Trebuchet MS", sans-serif;
   color: white;
 }
-/* Text under the radius slider displaying miles */
-#radiusLabel {
+
+#radiusMiles {
   color: white;
 }

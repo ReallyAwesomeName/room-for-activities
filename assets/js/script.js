@@ -63,73 +63,88 @@ const eventDisplayPanel = `
               
             <div href="#" class="list-group-item">
             <h4 class="list-group-item-heading">Event title</h4>
-              <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              <p class="venue"></p>
-              <button id="btn-3" class="button">See More!</button>
+            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p class="venue"></p>
+            <button id="btn-3" class="button">See More!</button>
             </div>
-
+            
             <div href="#" class="list-group-item">
-              <h4 class="list-group-item-heading">Event title</h4>
-              <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              <p class="venue"></p>
-              <button id="btn-4" class="button">See More!</button>
+            <h4 class="list-group-item-heading">Event title</h4>
+            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p class="venue"></p>
+            <button id="btn-4" class="button">See More!</button>
             </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-const mapDisplayPanel = `
-<div>
-  <p id="location">location there</p>
-  <div id="map"></div>
-  <div id="events"></div>
-</div>`;
-
-`<iframe
-  width="600"
-  height="450"
-  style="border:0"
-  loading="lazy"
-  allowfullscreen
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
-    &q=,Westville+NJ">
-</iframe>`
-
-var recentSearches = JSON.parse(localStorage.getItem('search')) || [];
-
-
-$(function () {
-  $("#datepickerFrom").datepicker();
-});
-$(function () {
-  $("#datepickerUntil").datepicker();
-});
-
-// NOTE: search click function is essentially the driver code
-// buttons
-$("#btnSearch").on("click", function (event) {
-  event.preventDefault();
-  // clear output areas incase they made a search previously
-  clearResults();
-  // call api to get data using values
-  var values = getEvents();
-  // display results
-  $(eventDisplayPanel).prependTo("#results");
-  showRecentSearches();
-});
-
-$("#btn-1").on("click", function (event) {
+            
+            </div>
+            </div>
+            
+            </div>
+            </div>
+            </div>
+            </div>
+            `;
+            
+            const mapDisplayPanel = `
+            <div>
+            <p id="location">location there</p>
+            <div id="map"></div>
+            <div id="events"></div>
+            </div>`;
+            
+            `<iframe
+            width="600"
+            height="450"
+            style="border:0"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
+            &q=,Westville+NJ">
+            </iframe>`
+            function showRecentSearches() {
+              var thisSearch = getValues();
+              recentSearches.push(thisSearch.search);
+              localStorage.setItem('search',JSON.stringify(recentSearches));
+            }
+            // TODO: function to display recent searches
+          
+            const recentSearches = (localStorage.getItem('search')) || [];
+            const previousSearch = document.getElementById('previousSearches');
+             previousSearch.innerHTML =  `<option value = ${recentSearches}> </option>`
+           
+           
+            //.map( (search) => {
+            // return `<option value = ${search}> </option>`.join("")
+            
+          
+            
+            
+            $(function () {
+              $("#datepickerFrom").datepicker();
+            });
+            $(function () {
+              $("#datepickerUntil").datepicker();
+            });
+            
+  // NOTE: search click function is essentially the driver code
+  // buttons
+  $("#btnSearch").on("click", function (event) {
+    event.preventDefault();
+    // clear output areas incase they made a search previously
+    clearResults();
+    // call api to get data using values
+    var values = getEvents();
+    // display results
+    $(eventDisplayPanel).prependTo("#results");
+    showRecentSearches();
+  });
+  
+  $("#btn-1").on("click", function (event) {
   event.preventDefault();
   $("#map").show();
   $(eventDisplayPanel).appendTo("main");
 });
+
 
 //"Clear" button element by its ID
 const clearBtn = document.getElementById("btnAdd");
@@ -171,10 +186,10 @@ function getValues() {
 function getEvents(page = 0) {
   // parameter json to add to queryUrl as needed
   let userParams = getValues();
-
+  
   // $("#events-panel").show();
   // $("#attraction-panel").hide();
-
+  
   if (page < 0) {
     page = 0;
     return;
@@ -184,7 +199,7 @@ function getEvents(page = 0) {
       page = 0;
     }
   }
-
+  
   // DEBUG: entering a zipCode results in "TypeError: json._embedded is undefined"
   // DEBUG: pointing to reference in showEvents()
   // iterate entered parameters and add to request url (remember & before each)
@@ -201,27 +216,28 @@ function getEvents(page = 0) {
     // NOTE: datepicker value is json w/ from and until keys
     // TODO: implement date range selection
     //   else if (key === "datepicker" && value) {
-    //   }
-  }
-
-  let queryUrl =
+      //   }
+    }
+    
+    let queryUrl =
     `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&dmaId=200&size=4&page=` +
     page;
-
-  $.ajax({
-    type: "GET",
-    url: queryUrl,
-    async: true,
-    dataType: "json",
-    success: function (json) {
-      getEvents.json = json;
-      showEvents(json);
-    },
+    
+    $.ajax({
+      type: "GET",
+      url: queryUrl,
+      async: true,
+      dataType: "json",
+      success: function (json) {
+        getEvents.json = json;
+        showEvents(json);
+      },
     error: function (xhr, status, err) {
       console.log(err);
     },
   });
 }
+
 
 function showEvents(json) {
   var items = $("#events .list-group-item");
@@ -248,54 +264,40 @@ function showEvents(json) {
       item.off("click");
       item.click(events[i], function (eventObject) {
         console.log(eventObject.data);
-      // try {
-        //   getAttraction(eventObject.data._embedded.attractions[0].id);
+        // try {
+          //   getAttraction(eventObject.data._embedded.attractions[0].id);
       // } catch (err) {
-      //   console.log(err);
-      // }
-    });
-    item = item.next();
+        //   console.log(err);
+        // }
+      });
+      item = item.next();
+    }
   }
-}
-
-const apiKey2 = "AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg";
-
-// add markers for each event to the `params` object
-
-
-// append the image element to the map display panel
-$(mapDisplayPanel).append(img);
-
-/* Radius Slider
-function updateRadiusLabel() {
-  var radius = document.getElementById("myRadius").value;
-  var label = document.getElementById("radiusLabel");
-  label.innerHTML = radius + " miles";
-}*/
-
-function clearResults() {
-  // TODO: function to clear previous search results from page upon repeated search
-  // TODO: returns nothing
-  // TODO: ensure this works even when there is nothing displayed
-  // TODO:    (this is called first thing when user clicks search button)
-  // TODO: must save previous results (if any) to local storage before clearing
-}
-
-function showRecentSearches() {
-  var thisSearch = getValues();
-  recentSearches.push(thisSearch.search);
-    localStorage.setItem('search',JSON.stringify(recentSearches));
+  
+  const apiKey2 = "AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg";
+  
+  // add markers for each event to the `params` object
+  
+  
+  // append the image element to the map display panel
+  $(mapDisplayPanel).append(img);
+  
+  /* Radius Slider
+  function updateRadiusLabel() {
+    var radius = document.getElementById("myRadius").value;
+    var label = document.getElementById("radiusLabel");
+    label.innerHTML = radius + " miles";
+  }*/
+  
+  function clearResults() {
+    // TODO: function to clear previous search results from page upon repeated search
+    // TODO: returns nothing
+    // TODO: ensure this works even when there is nothing displayed
+    // TODO:    (this is called first thing when user clicks search button)
+    // TODO: must save previous results (if any) to local storage before clearing
   }
-
-  // TODO: function to display recent searches
-  // TODO: returns nothing
-  // TODO: create the element to display recent searches
-  // TODO: give the element an id of "recent-searches"
-  // TODO: fill element with saved searches from local storage
-
-
-
-function createMap() {
+  
+  function createMap() {
   // TODO: function to place pings on a map
   // TODO: returns map element with pings
   // TODO: will need to use a map api

@@ -301,7 +301,7 @@ function showEvents(json) {
     }
   }
   
-  const apiKey2 = "AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg";
+  const apiKey2 = "AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ";
   
   // add markers for each event to the `params` object
   

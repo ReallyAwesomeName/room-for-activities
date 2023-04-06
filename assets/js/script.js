@@ -279,7 +279,7 @@ function showEvents(json) {
   
   
   // append the image element to the map display panel
-  $(mapDisplayPanel).append(img);
+  // $(mapDisplayPanel).append(img);
   
   /* Radius Slider
   function updateRadiusLabel() {
@@ -295,9 +295,27 @@ function showEvents(json) {
     // TODO:    (this is called first thing when user clicks search button)
     // TODO: must save previous results (if any) to local storage before clearing
   }
-  
-  function createMap() {
+
+
+ // Initialize the map when the page is loaded
+    // Create a map centered on San Francisco
+    const createMap = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 37.7749, lng: -122.4194 },
+      zoom: 12
+    });
+    
+  // Add a marker at a random location
+  const randomLat = Math.random() * (37.8 - 37.7) + 37.7;
+  const randomLng = Math.random() * (-122.3 - -122.4) + -122.4;
+  const latLng = new google.maps.LatLng(randomLat, randomLng);
+  const marker = new google.maps.Marker({
+    position: latLng,
+    map: createMap,
+    title: 'Hello World!'
+  });
+
+  // function createMap() {
   // TODO: function to place pings on a map
   // TODO: returns map element with pings
   // TODO: will need to use a map api
-}
+

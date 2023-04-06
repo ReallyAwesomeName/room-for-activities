@@ -37,7 +37,6 @@
   </head>
   <title>Sights & Sounds</title>
   <body>
-   
     <section
       class="hero is-primary"
       style="
@@ -53,7 +52,7 @@
         </p>
       </div>
     </section>
-    <main>
+    <main class="container">
       <div class="headerImage" style="display: inline-flex">
         <img
           id="header1"
@@ -138,16 +137,22 @@
         >
           Clear
         </button>
+      </div>
+      <section id="results" style="display: grid; grid-template-columns: 1fr 1fr;">
         <iframe
-  width="600"
-  height="450"
-  style="border:0"
-  loading="lazy"
-  allowfullscreen
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
-    &q=,Westville+NJ">
-</iframe>
+          class="box containerLeft"
+          id="map"
+          width="600"
+          height="450"
+          style="border: 0;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
+        &q=,Westville+NJ"
+        >
+        </iframe>
+      </section>
       <!--create a clear button -->
     </main>
     <footer

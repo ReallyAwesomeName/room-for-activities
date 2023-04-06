@@ -98,8 +98,7 @@ const eventDisplayPanel = `
             loading="lazy"
             allowfullscreen
             referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
-            &q=,Westville+NJ">
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ=,Westville+NJ">
             </iframe>`
             function showRecentSearches() {
               var thisSearch = getValues();
@@ -274,7 +273,7 @@ function showEvents(json) {
     }
   }
   
-  const apiKey2 = "AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg";
+  const apiKey2 = "AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ";
   
   // add markers for each event to the `params` object
   

@@ -34,7 +34,7 @@
 */
 
 const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
-// const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`
+const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`
 // TODO: maybe re-style with bulma?
 const eventDisplayPanel = `
 <div class="container">
@@ -90,7 +90,8 @@ const mapDisplayPanel = `
   <div id="map"></div>
   <div id="events"></div>
 </div>`;
-<iframe
+
+`<iframe
   width="600"
   height="450"
   style="border:0"
@@ -99,9 +100,9 @@ const mapDisplayPanel = `
   referrerpolicy="no-referrer-when-downgrade"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
     &q=,Westville+NJ">
-</iframe>
+</iframe>`
 
-var recentSearches = [];
+var recentSearches = JSON.parse(localStorage.getItem('search')) || [];
 
 
 $(function () {
@@ -283,7 +284,7 @@ function clearResults() {
 function showRecentSearches() {
   var thisSearch = getValues();
   recentSearches.push(thisSearch.search);
-    localStorage.setItem('search',(recentSearches));
+    localStorage.setItem('search',JSON.stringify(recentSearches));
   }
 
   // TODO: function to display recent searches

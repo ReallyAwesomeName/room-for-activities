@@ -90,6 +90,19 @@ const mapDisplayPanel = `
   <div id="map"></div>
   <div id="events"></div>
 </div>`;
+<iframe
+  width="600"
+  height="450"
+  style="border:0"
+  loading="lazy"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
+    &q=,Westville+NJ">
+</iframe>
+
+var recentSearches = [];
+
 
 $(function () {
   $("#datepickerFrom").datepicker();
@@ -107,6 +120,13 @@ $("#btnSearch").on("click", function (event) {
   // call api to get data using values
   var values = getEvents();
   // display results
+  $(eventDisplayPanel).prependTo("#results");
+  showRecentSearches();
+});
+
+$("#btn-1").on("click", function (event) {
+  event.preventDefault();
+  $("#map").show();
   $(eventDisplayPanel).appendTo("main");
 });
 
@@ -147,7 +167,6 @@ function getValues() {
     datepicker: dateRange,
   };
 }
-
 function getEvents(page = 0) {
   // parameter json to add to queryUrl as needed
   let userParams = getValues();
@@ -211,25 +230,25 @@ function showEvents(json) {
   for (var i = 0; i < events.length; i++) {
     item.children(".list-group-item-heading").text(events[i].name);
     item
-      .children(".list-group-item-text")
-      .text(events[i].dates.start.localDate);
+    .children(".list-group-item-text")
+    .text(events[i].dates.start.localDate);
     try {
       item
-        .children(".venue")
-        .text(
-          events[i]._embedded.venues[0].name +
-            " in " +
-            events[i]._embedded.venues[0].city.name
+      .children(".venue")
+      .text(
+        events[i]._embedded.venues[0].name +
+        " in " +
+        events[i]._embedded.venues[0].city.name
         );
-    } catch (err) {
-      console.log(err);
-    }
-    item.show();
-    item.off("click");
-    item.click(events[i], function (eventObject) {
-      console.log(eventObject.data);
+      } catch (err) {
+        console.log(err);
+      }
+      item.show();
+      item.off("click");
+      item.click(events[i], function (eventObject) {
+        console.log(eventObject.data);
       // try {
-      //   getAttraction(eventObject.data._embedded.attractions[0].id);
+        //   getAttraction(eventObject.data._embedded.attractions[0].id);
       // } catch (err) {
       //   console.log(err);
       // }
@@ -262,12 +281,18 @@ function clearResults() {
 }
 
 function showRecentSearches() {
+  var thisSearch = getValues();
+  recentSearches.push(thisSearch.search);
+    localStorage.setItem('search',(recentSearches));
+  }
+
   // TODO: function to display recent searches
   // TODO: returns nothing
   // TODO: create the element to display recent searches
   // TODO: give the element an id of "recent-searches"
   // TODO: fill element with saved searches from local storage
-}
+
+
 
 function createMap() {
   // TODO: function to place pings on a map

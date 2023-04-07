@@ -84,46 +84,45 @@ const eventDisplayPanel = `
             </div>
             `;
             
-            const mapDisplayPanel = `
-            <div>
-            <p id="location">location there</p>
-            <div id="map"></div>
-            <div id="events"></div>
-            </div>`;
-            
-            `<iframe
-            width="600"
-            height="450"
-            style="border:0"
-            loading="lazy"
-            allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ=,Westville+NJ">
-            </iframe>`
-            function showRecentSearches() {
-              var thisSearch = getValues();
-              recentSearches.push(thisSearch.search);
-              localStorage.setItem('search',JSON.stringify(recentSearches));
-            }
-            // TODO: function to display recent searches
-          
-            const recentSearches = (localStorage.getItem('search')) || [];
-            const previousSearch = document.getElementById('previousSearches');
-             previousSearch.innerHTML =  `<option value = ${recentSearches}> </option>`
-           
-           
-            //.map( (search) => {
-            // return `<option value = ${search}> </option>`.join("")
-            
-          
-            
-            
-            $(function () {
-              $("#datepickerFrom").datepicker();
-            });
-            $(function () {
-              $("#datepickerUntil").datepicker();
-            });
+const mapDisplayPanel = `
+<div>
+<p id="location">location there</p>
+<div id="map"></div>
+<div id="events"></div>
+</div>`;
+
+`<iframe
+width="600"
+height="450"
+style="border:0"
+loading="lazy"
+allowfullscreen
+referrerpolicy="no-referrer-when-downgrade"
+src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
+&q=,Westville+NJ">
+</iframe>`;
+
+
+
+
+
+
+// TODO: function to display recent searches
+
+
+
+//.map( (search) => {
+// return `<option value = ${search}> </option>`.join("")
+
+
+
+
+$(function () {
+  $("#datepickerFrom").datepicker();
+});
+$(function () {
+  $("#datepickerUntil").datepicker();
+});
             
   // NOTE: search click function is essentially the driver code
   // buttons
@@ -135,6 +134,7 @@ const eventDisplayPanel = `
     var values = getEvents();
     // display results
     $(eventDisplayPanel).prependTo("#results");
+    saveRecentSearch();
     showRecentSearches();
   });
   
@@ -163,6 +163,34 @@ clearBtn.addEventListener("click", () => {
   datepickerFrom.value = "";
   datepickerUntil.value = "";
 });
+
+function saveRecentSearch(){
+  var thisSearch = getValues().search;
+  localStorage.setItem(`activitySearch${localStorage.length}`,thisSearch);
+}
+
+function showRecentSearches(){
+  for (const [key,value] of Object.entries(localStorage)){
+    if (key.includes("activitySearch")){
+      console.log(`key: ${key},`, value);
+      $("#previousSearches").append(`<option value = ${value}></option>`);
+      
+    }
+  }
+}
+
+// function showRecentSearches() {
+//   var thisSearch = getValues();
+//   const recentSearches = (localStorage.getItem('search'));
+//   localStorage.setItem('search',JSON.stringify(recentSearches));
+//   const previousSearch = document.getElementById('previousSearches');
+//   recentSearches += thisSearch.search;
+
+//   recentSearches.forEach(function(search) {
+//     previousSearch.innerHTML += `<option value = ${search}> </option>`
+//   })
+//   // previousSearch.innerHTML =  `<option value = ${recentSearches}> </option>`
+// }
 
 // get values from the form
 // return json with (element id, value) pairs
@@ -208,10 +236,10 @@ function getEvents(page = 0) {
     if (key === "search" && value !== "") {
       queryParams += `&keyword=${value}`;
     } else if (key === "zipCode" && value !== "") {
-      queryParams += `&postalCode=${value}`;
-    } else if (key === "myRadius" && value !== "") {
-      queryParams += `&radius=${value}`;
-    }
+      queryParams += `&postalCode=${value}`;} 
+    //   else if (key === "myRadius" && value !== "") {
+    //   queryParams += `&radius=${value}`;
+    // }
     // NOTE: datepicker value is json w/ from and until keys
     // TODO: implement date range selection
     //   else if (key === "datepicker" && value) {
@@ -318,4 +346,5 @@ function showEvents(json) {
   // TODO: function to place pings on a map
   // TODO: returns map element with pings
   // TODO: will need to use a map api
+
 

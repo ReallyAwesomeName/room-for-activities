@@ -32,58 +32,74 @@
 		  all currently presented events are saved to local storage
       return to 2
 */
-
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
 const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
 const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`
 // TODO: maybe re-style with bulma?
 const eventDisplayPanel = `
-<div class="container">
-  <div class="row">
-    <div class="col-xs-6">
-      <div id='events-panel' class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Events</h3>
-        </div>
-        <div class="panel-body">
-          <div id="events" class="list-group">
+<div class="container is-max-width">
+          <div class="row">
+            <div class="column is-full">
+              <div id="events-panel" class="panel is-danger && has-text-white && has-background-dark">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Events</h3>
+                </div>
+                <div class="panel is-body">
+                  <div id="events" class="list-group">
+                    <div class="list-group-item pt-4 && pl-2">
+                      <h4 class="list-group-item-heading">Event title</h4>
+                      <p class="list-group-item-text pr-2">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
+                      </p>
+                      <p class="venue"></p>
+                      <button id="btn-1" class="button is-danger">Show on Map</button>
+                    </div> 
 
-            <div class="list-group-item">
-              <h4 class="list-group-item-heading">Event title</h4>
-              <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              <p class="venue"></p>
-              <button id="btn-1" class="button">See More!</button>
+                    <div class="list-group-item pt-4 && pl-2">
+                      <h4 class="list-group-item-heading">Event title</h4>
+                      <p class="list-group-item-text pr-2">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
+                      </p>
+                      <p class="venue"></p>
+                      <button id="btn-2" class="button is-danger">Show on Map</button>
+                    </div>
+
+                    <div href="#" class="list-group-item pt-4 && pl-2">
+                      <h4 class="list-group-item-heading">Event title</h4>
+                      <p class="list-group-item-text pr-2">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
+                      </p>
+                      <p class="venue"></p>
+                      <button id="btn-3" class="button is-danger">Show on Map</button>
+                    </div>
+
+                    <div href="#" class="list-group-item py-4 && pl-2">
+                      <h4 class="list-group-item-heading">Event title</h4>
+                      <p class="list-group-item-text pr-2">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
+                      </p>
+                      <p class="venue"></p>
+                      <button id="btn-4" class="button is-danger">Show on Map</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            <div class="list-group-item">  
-              <h4 class="list-group-item-heading">Event title</h4>
-              <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              <p class="venue"></p>
-              <button id="btn-2" class="button">See More!</button>
-            </div>
-              
-            <div href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event title</h4>
-            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p class="venue"></p>
-            <button id="btn-3" class="button">See More!</button>
-            </div>
-            
-            <div href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event title</h4>
-            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p class="venue"></p>
-            <button id="btn-4" class="button">See More!</button>
-            </div>
-            
-            </div>
-            </div>
-            
-            </div>
-            </div>
-            </div>
-            </div>
-            `;
-            
+          </div>
+        </div>
+`;
+
 const mapDisplayPanel = `
 <div>
 <p id="location">location there</p>

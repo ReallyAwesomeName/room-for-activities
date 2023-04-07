@@ -37,7 +37,7 @@ const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
 const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`;
 // TODO: maybe re-style with bulma?
 const eventDisplayPanel = `
-<div class="container is-max-width">
+<div class="container is-max-width" id="resultsContainer">
           <div class="row">
             <div class="column is-full">
               <div id="events-panel" class="panel is-danger && has-text-white">
@@ -46,48 +46,36 @@ const eventDisplayPanel = `
                 </div>
                 <div class="panel is-body && has-background-dark">
                   <div id="events" class="list-group">
-                    <div class="list-group-item pt-4 && pl-2 && has-background-dark">
-                      <h4 class="list-group-item-heading">Event title</h4>
+                    <div class="list-group-item p-4 && has-background-dark">
+                      <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
                       </p>
                       <p class="venue"></p>
-                      <button id="btn-1" class="button is-danger">Show on Map</button>
+                      <button id="btn-1" class="button is-danger m-2">Show on Map</button>
                     </div> 
 
-                    <div class="list-group-item pt-4 && pl-2 && has-background-dark">
-                      <h4 class="list-group-item-heading">Event title</h4>
+                    <div class="list-group-item p-4 && has-background-dark">
+                      <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
                       </p>
                       <p class="venue"></p>
-                      <button id="btn-2" class="button is-danger">Show on Map</button>
+                      <button id="btn-2" class="button is-danger m-2">Show on Map</button>
                     </div>
 
-                    <div href="#" class="list-group-item pt-4 && pl-2 && has-background-dark">
-                      <h4 class="list-group-item-heading">Event title</h4>
+                    <div class="list-group-item p-4 && has-background-dark">
+                      <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
                       </p>
                       <p class="venue"></p>
-                      <button id="btn-3" class="button is-danger">Show on Map</button>
+                      <button id="btn-3" class="button is-danger m-2">Show on Map</button>
                     </div>
 
-                    <div href="#" class="list-group-item py-4 && pl-2 && has-background-dark">
-                      <h4 class="list-group-item-heading">Event title</h4>
+                    <div class="list-group-item p-4 && has-background-dark">
+                      <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
                       </p>
                       <p class="venue"></p>
-                      <button id="btn-4" class="button is-danger">Show on Map</button>
+                      <button id="btn-4" class="button is-danger m-2">Show on Map</button>
                     </div>
                   </div>
                 </div>
@@ -96,29 +84,6 @@ const eventDisplayPanel = `
           </div>
         </div>
 `;
-
-const mapDisplayPanel = `
-<div>
-<p id="location">location there</p>
-<div id="map"></div>
-<div id="events"></div>
-</div>`;
-
-`<iframe
-width="600"
-height="450"
-style="border:0"
-loading="lazy"
-allowfullscreen
-referrerpolicy="no-referrer-when-downgrade"
-src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP4KnZQZlENfg
-&q=,Westville+NJ">
-</iframe>`;
-
-// TODO: function to display recent searches
-
-//.map( (search) => {
-// return `<option value = ${search}> </option>`.join("")
 
 $(function () {
   $("#datepickerFrom").datepicker();
@@ -131,20 +96,15 @@ $(function () {
 // buttons
 $("#btnSearch").on("click", function (event) {
   event.preventDefault();
-  // clear output areas incase they made a search previously
-  clearResults();
+  // TODO: clear output areas incase they made a search previously
+
   // call api to get data using values
-  var values = getEvents();
+  getEvents();
   // display results
   $(eventDisplayPanel).prependTo("#results");
   saveRecentSearch();
   showRecentSearches();
 });
-
-// $("#btn-1").on("click", function (event) {
-//   event.preventDefault();
-//   $(eventDisplayPanel).appendTo("main");
-// });
 
 //"Clear" button element by its ID
 const clearBtn = document.getElementById("btnAdd");
@@ -178,19 +138,6 @@ function showRecentSearches() {
     }
   }
 }
-
-// function showRecentSearches() {
-//   var thisSearch = getValues();
-//   const recentSearches = (localStorage.getItem('search'));
-//   localStorage.setItem('search',JSON.stringify(recentSearches));
-//   const previousSearch = document.getElementById('previousSearches');
-//   recentSearches += thisSearch.search;
-
-//   recentSearches.forEach(function(search) {
-//     previousSearch.innerHTML += `<option value = ${search}> </option>`
-//   })
-//   // previousSearch.innerHTML =  `<option value = ${recentSearches}> </option>`
-// }
 
 // get values from the form
 // return json with (element id, value) pairs
@@ -272,6 +219,7 @@ function showEvents(json) {
   items.hide();
   var events = json._embedded.events;
   var item = items.first();
+  // iterate events and fill out event results card
   for (let i = 0; i < events.length; i++) {
     item.children(".list-group-item-heading").text(events[i].name);
     item
@@ -285,6 +233,7 @@ function showEvents(json) {
             " in " +
             events[i]._embedded.venues[0].city.name
         );
+      // attach image of venue to event listing
       // var img = document.createElement("img");
       // img.src = events[i]._embedded.venues[0].images[0].url;
       // img.alt = events[i]._embedded.venues[0].name;
@@ -317,6 +266,7 @@ async function plotEvent(thisEvent) {
     typeof parseFloat(thisEvent._embedded.venues[0].location.latitude)
   );
   // var mapDiv = $("#map");
+  // target map div and initialize map in it, centered on thisEvent
   var mapDiv = document.getElementById("map");
   const { Map } = await google.maps.importLibrary("maps");
   const thisMap = new Map(mapDiv, {
@@ -326,6 +276,7 @@ async function plotEvent(thisEvent) {
     },
     zoom: 8,
   });
+  // place marker on map at thisEvent location
   const marker = new google.maps.Marker({
     position: {
       lat: parseFloat(thisEvent._embedded.venues[0].location.latitude),
@@ -334,28 +285,10 @@ async function plotEvent(thisEvent) {
     map: thisMap,
     title: thisEvent._embedded.venues[0].name,
   });
+  // add listener to marker linking to ticketmaster page
   marker.addListener("click", function () {
     window.open(thisEvent._embedded.venues[0].url, "_blank");
   });
-  mapDiv.append(`<div style="height: 10rem">${thisMap}</div>`);
 }
 
-const apiKey2 = "AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ";
-
-function clearResults() {
-  // TODO: function to clear previous search results from page upon repeated search
-  // TODO: returns nothing
-  // TODO: ensure this works even when there is nothing displayed
-  // TODO:    (this is called first thing when user clicks search button)
-  // TODO: must save previous results (if any) to local storage before clearing
-  // NOTE: maybe rebuild event list instead, like the map
-}
-
-// add markers for each event to the `params` object
-
-/* Radius Slider
-  function updateRadiusLabel() {
-    var radius = document.getElementById("myRadius").value;
-    var label = document.getElementById("radiusLabel");
-    label.innerHTML = radius + " miles";
-  }*/
+// const apiKey2 = "AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ";

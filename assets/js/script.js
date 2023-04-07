@@ -40,13 +40,13 @@ const eventDisplayPanel = `
 <div class="container is-max-width">
           <div class="row">
             <div class="column is-full">
-              <div id="events-panel" class="panel is-danger && has-text-black">
+              <div id="events-panel" class="panel is-danger && has-text-white">
                 <div class="panel-heading">
                   <h3 class="panel-title">Events</h3>
                 </div>
                 <div class="panel is-body && has-background-dark">
                   <div id="events" class="list-group">
-                    <div class="list-group-item pt-4 && pl-2">
+                    <div class="list-group-item pt-4 && pl-2 && has-background-dark">
                       <h4 class="list-group-item-heading">Event title</h4>
                       <p class="list-group-item-text pr-2">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -57,7 +57,7 @@ const eventDisplayPanel = `
                       <button id="btn-1" class="button is-danger">Show on Map</button>
                     </div> 
 
-                    <div class="list-group-item pt-4 && pl-2">
+                    <div class="list-group-item pt-4 && pl-2 && has-background-dark">
                       <h4 class="list-group-item-heading">Event title</h4>
                       <p class="list-group-item-text pr-2">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -68,7 +68,7 @@ const eventDisplayPanel = `
                       <button id="btn-2" class="button is-danger">Show on Map</button>
                     </div>
 
-                    <div href="#" class="list-group-item pt-4 && pl-2">
+                    <div href="#" class="list-group-item pt-4 && pl-2 && has-background-dark">
                       <h4 class="list-group-item-heading">Event title</h4>
                       <p class="list-group-item-text pr-2">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -79,7 +79,7 @@ const eventDisplayPanel = `
                       <button id="btn-3" class="button is-danger">Show on Map</button>
                     </div>
 
-                    <div href="#" class="list-group-item py-4 && pl-2">
+                    <div href="#" class="list-group-item py-4 && pl-2 && has-background-dark">
                       <h4 class="list-group-item-heading">Event title</h4>
                       <p class="list-group-item-text pr-2">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,

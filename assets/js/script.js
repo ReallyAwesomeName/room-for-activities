@@ -40,11 +40,11 @@ const eventDisplayPanel = `
 <div class="container is-max-width">
           <div class="row">
             <div class="column is-full">
-              <div id="events-panel" class="panel is-danger && has-text-white && has-background-dark">
+              <div id="events-panel" class="panel is-danger && has-text-black">
                 <div class="panel-heading">
                   <h3 class="panel-title">Events</h3>
                 </div>
-                <div class="panel is-body">
+                <div class="panel is-body && has-background-dark">
                   <div id="events" class="list-group">
                     <div class="list-group-item pt-4 && pl-2">
                       <h4 class="list-group-item-heading">Event title</h4>

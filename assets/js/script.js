@@ -40,42 +40,42 @@ const eventDisplayPanel = `
 <div class="container is-fluid" id="resultsContainer">
           <div class="row">
             <div class="column is-full">
-              <div id="events-panel" class="panel is-danger && has-text-white && is-max-width">
+              <div id="events-panel" class="panel is-link && has-text-white && is-max-width">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Events</h3>
+                  <h2 class="panel-title && has-text-centered">Events</h2>
                 </div>
-                <div class="panel is-body && has-background-dark">
+                <div class="panel is-body && has-background-grey-light">
                   <div id="events" class="list-group">
-                    <div class="list-group-item p-4 && has-background-dark">
+                    <div class="list-group-item p-4 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
                       <p class="venue"></p>
-                      <button id="btn-1" class="button is-danger m-2">Show on Map</button>
+                      <button id="btn-1" class="button is-link m-2">Show on Map</button>
                     </div> 
 
-                    <div class="list-group-item p-4 && has-background-dark">
+                    <div class="list-group-item p-4 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
                       <p class="venue"></p>
-                      <button id="btn-2" class="button is-danger m-2">Show on Map</button>
+                      <button id="btn-2" class="button is-link m-2">Show on Map</button>
                     </div>
 
-                    <div class="list-group-item p-4 && has-background-dark">
+                    <div class="list-group-item p-4 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
                       <p class="venue"></p>
-                      <button id="btn-3" class="button is-danger m-2">Show on Map</button>
+                      <button id="btn-3" class="button is-link m-2">Show on Map</button>
                     </div>
 
-                    <div class="list-group-item p-4 && has-background-dark">
+                    <div class="list-group-item p-4 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
                       <p class="venue"></p>
-                      <button id="btn-4" class="button is-danger m-2">Show on Map</button>
+                      <button id="btn-4" class="button is-link m-2">Show on Map</button>
                     </div>
                   </div>
                 </div>

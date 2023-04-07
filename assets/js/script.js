@@ -34,7 +34,7 @@
 */
 
 const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
-const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`
+const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`;
 // TODO: maybe re-style with bulma?
 const eventDisplayPanel = `
 <div class="container is-max-width">
@@ -115,20 +115,10 @@ src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlW9L5B2-Q1QSaPplLy0MP
 &q=,Westville+NJ">
 </iframe>`;
 
-
-
-
-
-
 // TODO: function to display recent searches
-
-
 
 //.map( (search) => {
 // return `<option value = ${search}> </option>`.join("")
-
-
-
 
 $(function () {
   $("#datepickerFrom").datepicker();
@@ -136,27 +126,25 @@ $(function () {
 $(function () {
   $("#datepickerUntil").datepicker();
 });
-            
-  // NOTE: search click function is essentially the driver code
-  // buttons
-  $("#btnSearch").on("click", function (event) {
-    event.preventDefault();
-    // clear output areas incase they made a search previously
-    clearResults();
-    // call api to get data using values
-    var values = getEvents();
-    // display results
-    $(eventDisplayPanel).prependTo("#results");
-    saveRecentSearch();
-    showRecentSearches();
-  });
-  
-  $("#btn-1").on("click", function (event) {
+
+// NOTE: search click function is essentially the driver code
+// buttons
+$("#btnSearch").on("click", function (event) {
   event.preventDefault();
-  $("#map").show();
-  $(eventDisplayPanel).appendTo("main");
+  // clear output areas incase they made a search previously
+  clearResults();
+  // call api to get data using values
+  var values = getEvents();
+  // display results
+  $(eventDisplayPanel).prependTo("#results");
+  saveRecentSearch();
+  showRecentSearches();
 });
 
+// $("#btn-1").on("click", function (event) {
+//   event.preventDefault();
+//   $(eventDisplayPanel).appendTo("main");
+// });
 
 //"Clear" button element by its ID
 const clearBtn = document.getElementById("btnAdd");
@@ -177,17 +165,16 @@ clearBtn.addEventListener("click", () => {
   datepickerUntil.value = "";
 });
 
-function saveRecentSearch(){
+function saveRecentSearch() {
   var thisSearch = getValues().search;
-  localStorage.setItem(`activitySearch${localStorage.length}`,thisSearch);
+  localStorage.setItem(`activitySearch${localStorage.length}`, thisSearch);
 }
 
-function showRecentSearches(){
-  for (const [key,value] of Object.entries(localStorage)){
-    if (key.includes("activitySearch")){
+function showRecentSearches() {
+  for (const [key, value] of Object.entries(localStorage)) {
+    if (key.includes("activitySearch")) {
       console.log(`key: ${key},`, value);
       $("#previousSearches").append(`<option value = ${value}></option>`);
-      
     }
   }
 }
@@ -226,10 +213,10 @@ function getValues() {
 function getEvents(page = 0) {
   // parameter json to add to queryUrl as needed
   let userParams = getValues();
-  
+
   // $("#events-panel").show();
   // $("#attraction-panel").hide();
-  
+
   if (page < 0) {
     page = 0;
     return;
@@ -239,7 +226,7 @@ function getEvents(page = 0) {
       page = 0;
     }
   }
-  
+
   // DEBUG: entering a zipCode results in "TypeError: json._embedded is undefined"
   // DEBUG: pointing to reference in showEvents()
   // iterate entered parameters and add to request url (remember & before each)
@@ -249,140 +236,166 @@ function getEvents(page = 0) {
     if (key === "search" && value !== "") {
       queryParams += `&keyword=${value}`;
     } else if (key === "zipCode" && value !== "") {
-      queryParams += `&postalCode=${value}`;} 
+      queryParams += `&postalCode=${value}`;
+    }
+    // FIXME: THIS DOESN'T WORK
     //   else if (key === "myRadius" && value !== "") {
     //   queryParams += `&radius=${value}`;
     // }
     // NOTE: datepicker value is json w/ from and until keys
     // TODO: implement date range selection
     //   else if (key === "datepicker" && value) {
-      //   }
-    }
-    
-    let queryUrl =
+    //   }
+  }
+
+  let queryUrl =
     `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&dmaId=200&size=4&page=` +
     page;
-    
-    $.ajax({
-      type: "GET",
-      url: queryUrl,
-      async: true,
-      dataType: "json",
-      success: function (json) {
-        getEvents.json = json;
-        showEvents(json);
-      },
+
+  $.ajax({
+    type: "GET",
+    url: queryUrl,
+    async: true,
+    dataType: "json",
+    success: function (json) {
+      getEvents.json = json;
+      showEvents(json);
+    },
     error: function (xhr, status, err) {
       console.log(err);
     },
   });
 }
 
-
 function showEvents(json) {
   var items = $("#events .list-group-item");
   items.hide();
   var events = json._embedded.events;
   var item = items.first();
-  for (var i = 0; i < events.length; i++) {
+  for (let i = 0; i < events.length; i++) {
     item.children(".list-group-item-heading").text(events[i].name);
     item
-    .children(".list-group-item-text")
-    .text(events[i].dates.start.localDate);
+      .children(".list-group-item-text")
+      .text(events[i].dates.start.localDate);
     try {
       item
-      .children(".venue")
-      .text(
-        events[i]._embedded.venues[0].name +
-        " in " +
-        events[i]._embedded.venues[0].city.name
+        .children(".venue")
+        .text(
+          events[i]._embedded.venues[0].name +
+            " in " +
+            events[i]._embedded.venues[0].city.name
         );
-      } catch (err) {
-        console.log(err);
-      }
+      // var img = document.createElement("img");
+      // img.src = events[i]._embedded.venues[0].images[0].url;
+      // img.alt = events[i]._embedded.venues[0].name;
+      // item.append(img);
+      // item.append(document.createElement("br"));
+
+      // plot this venue on map
       item.show();
       item.off("click");
+      // var thisButton = item.children("button");
       item.click(events[i], function (eventObject) {
         console.log(eventObject.data);
+        plotEvent(events[i]);
         // try {
-          //   getAttraction(eventObject.data._embedded.attractions[0].id);
-      // } catch (err) {
+        //   getAttraction(eventObject.data._embedded.attractions[0].id);
+        // } catch (err) {
         //   console.log(err);
         // }
       });
-      item = item.next();
+    } catch (err) {
+      console.log(err);
     }
+    item = item.next();
   }
-  
-  const apiKey2 = "AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ";
-  
-  // add markers for each event to the `params` object
-  
-  
-  // append the image element to the map display panel
-  // $(mapDisplayPanel).append(img);
-  
-  /* Radius Slider
+}
+
+async function plotEvent(thisEvent) {
+  // plot this venue on map
+  console.log(
+    typeof parseFloat(thisEvent._embedded.venues[0].location.latitude)
+  );
+  // var mapDiv = $("#map");
+  var mapDiv = document.getElementById("map");
+  const { Map } = await google.maps.importLibrary("maps");
+  const thisMap = new Map(mapDiv, {
+    center: {
+      lat: parseFloat(thisEvent._embedded.venues[0].location.latitude),
+      lng: parseFloat(thisEvent._embedded.venues[0].location.longitude),
+    },
+    zoom: 8,
+  });
+  const marker = new google.maps.Marker({
+    position: {
+      lat: parseFloat(thisEvent._embedded.venues[0].location.latitude),
+      lng: parseFloat(thisEvent._embedded.venues[0].location.longitude),
+    },
+    map: thisMap,
+    title: thisEvent._embedded.venues[0].name,
+  });
+  marker.addListener("click", function () {
+    window.open(thisEvent._embedded.venues[0].url, "_blank");
+  });
+  mapDiv.append(`<div style="height: 10rem">${thisMap}</div>`);
+}
+
+const apiKey2 = "AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ";
+
+function clearResults() {
+  // TODO: function to clear previous search results from page upon repeated search
+  // TODO: returns nothing
+  // TODO: ensure this works even when there is nothing displayed
+  // TODO:    (this is called first thing when user clicks search button)
+  // TODO: must save previous results (if any) to local storage before clearing
+  // NOTE: maybe rebuild event list instead, like the map
+}
+
+// add markers for each event to the `params` object
+
+// append the image element to the map display panel
+// $(mapDisplayPanel).append(img);
+
+/* Radius Slider
   function updateRadiusLabel() {
     var radius = document.getElementById("myRadius").value;
     var label = document.getElementById("radiusLabel");
     label.innerHTML = radius + " miles";
   }*/
-  
-  function clearResults() {
-    // TODO: function to clear previous search results from page upon repeated search
-    // TODO: returns nothing
-    // TODO: ensure this works even when there is nothing displayed
-    // TODO:    (this is called first thing when user clicks search button)
-    // TODO: must save previous results (if any) to local storage before clearing
-  }
 
+// Initialize the map when the page is loaded
+// Create a map centered on San Francisco
+//   const createMap = new google.maps.Map(document.getElementById('map'), {
+//     center: { lat: 37.7749, lng: -122.4194 },
+//     zoom: 12
+//   });
 
- // Initialize the map when the page is loaded
-    // Create a map centered on San Francisco
-  //   const createMap = new google.maps.Map(document.getElementById('map'), {
-  //     center: { lat: 37.7749, lng: -122.4194 },
-  //     zoom: 12
-  //   });
-    
-  // // Add a marker at a random location
-  // const randomLat = Math.random() * (37.8 - 37.7) + 37.7;
-  // const randomLng = Math.random() * (-122.3 - -122.4) + -122.4;
-  // const latLng = new google.maps.LatLng(randomLat, randomLng);
-  // const marker = new google.maps.Marker({
-  //   position: latLng,
-  //   map: createMap,
-  //   title: 'Hello World!'
-  // });
+// // Add a marker at a random location
+// const randomLat = Math.random() * (37.8 - 37.7) + 37.7;
+// const randomLng = Math.random() * (-122.3 - -122.4) + -122.4;
+// const latLng = new google.maps.LatLng(randomLat, randomLng);
+// const marker = new google.maps.Marker({
+//   position: latLng,
+//   map: createMap,
+//   title: 'Hello World!'
+// });
 
-  
-  const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}&location=LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);`;
-  
-  fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
-    // Loop through the events and create a marker for each one
-    data._embedded.events.forEach(event => {
-      
-      const latLng = new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);
-      const marker = new google.maps.Marker({
-        position: latLng,
-        map: createMap,
-        title: event.name
-      });
-    });
-  })
-  .catch(error => {
-    console.error('Error fetching event data from Ticketmaster API:', error);
-  });
-  
-  // function createMap() {
-    const createMap = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 37.7749, lng: -122.4194 },
-      zoom: 12
-    });
-  // TODO: function to place pings on a map
-  // TODO: returns map element with pings
-  // TODO: will need to use a map api
+// const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}&location=LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);`;
 
+// fetch(apiUrl)
+// .then(response => response.json())
+// .then(data => {
+//   // Loop through the events and create a marker for each one
+//   data._embedded.events.forEach(event => {
 
+//     const latLng = new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);
+//     const marker = new google.maps.Marker({
+//       position: latLng,
+//       map: createMap,
+//       title: event.name
+//     });
+//   });
+// })
+// .catch(error => {
+//   console.error('Error fetching event data from Ticketmaster API:', error);
+// });

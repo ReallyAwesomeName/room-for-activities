@@ -96,8 +96,10 @@ $(function () {
 // buttons
 $("#btnSearch").on("click", function (event) {
   event.preventDefault();
-  // TODO: clear output areas incase they made a search previously
-
+  //  clears output areas incase they made a search previously.
+  $("#resultsContainer").remove();
+  // clears out map that was previously shown.
+  $("#map").empty();
   // call api to get data using values
   getEvents();
   // display results

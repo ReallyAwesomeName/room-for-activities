@@ -37,10 +37,10 @@ const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
 const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`;
 // TODO: maybe re-style with bulma?
 const eventDisplayPanel = `
-<div class="container is-max-width" id="resultsContainer">
+<div class="container is-fluid" id="resultsContainer">
           <div class="row">
             <div class="column is-full">
-              <div id="events-panel" class="panel is-danger && has-text-white">
+              <div id="events-panel" class="panel is-danger && has-text-white && is-max-width">
                 <div class="panel-heading">
                   <h3 class="panel-title">Events</h3>
                 </div>

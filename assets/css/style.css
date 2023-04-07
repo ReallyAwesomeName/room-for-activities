@@ -33,3 +33,6 @@ body {
   color: white;
 }
 
+label {
+  font-size: 25px;
+}

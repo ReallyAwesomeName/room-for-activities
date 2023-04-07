@@ -32,10 +32,7 @@
 		  all currently presented events are saved to local storage
       return to 2
 */
-<link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
+
 const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
 const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`
 // TODO: maybe re-style with bulma?

@@ -353,49 +353,9 @@ function clearResults() {
 
 // add markers for each event to the `params` object
 
-// append the image element to the map display panel
-// $(mapDisplayPanel).append(img);
-
 /* Radius Slider
   function updateRadiusLabel() {
     var radius = document.getElementById("myRadius").value;
     var label = document.getElementById("radiusLabel");
     label.innerHTML = radius + " miles";
   }*/
-
-// Initialize the map when the page is loaded
-// Create a map centered on San Francisco
-//   const createMap = new google.maps.Map(document.getElementById('map'), {
-//     center: { lat: 37.7749, lng: -122.4194 },
-//     zoom: 12
-//   });
-
-// // Add a marker at a random location
-// const randomLat = Math.random() * (37.8 - 37.7) + 37.7;
-// const randomLng = Math.random() * (-122.3 - -122.4) + -122.4;
-// const latLng = new google.maps.LatLng(randomLat, randomLng);
-// const marker = new google.maps.Marker({
-//   position: latLng,
-//   map: createMap,
-//   title: 'Hello World!'
-// });
-
-// const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}&location=LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);`;
-
-// fetch(apiUrl)
-// .then(response => response.json())
-// .then(data => {
-//   // Loop through the events and create a marker for each one
-//   data._embedded.events.forEach(event => {
-
-//     const latLng = new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);
-//     const marker = new google.maps.Marker({
-//       position: latLng,
-//       map: createMap,
-//       title: event.name
-//     });
-//   });
-// })
-// .catch(error => {
-//   console.error('Error fetching event data from Ticketmaster API:', error);
-// });

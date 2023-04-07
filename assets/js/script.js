@@ -355,32 +355,32 @@ function showEvents(json) {
   //   title: 'Hello World!'
   // });
 
-  const createMap = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 37.7749, lng: -122.4194 },
-    zoom: 12
-  });
   
-  const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}&latlong=50.889,-122.9994`;
+  const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}&location=LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);`;
   
   fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      // Loop through the events and create a marker for each one
-      data._embedded.events.forEach(event => {
-        const latLng = new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);
-  
-        const marker = new google.maps.Marker({
-          position: latLng,
-          map: createMap,
-          title: event.name
-        });
+  .then(response => response.json())
+  .then(data => {
+    // Loop through the events and create a marker for each one
+    data._embedded.events.forEach(event => {
+      
+      const latLng = new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude);
+      const marker = new google.maps.Marker({
+        position: latLng,
+        map: createMap,
+        title: event.name
       });
-    })
-    .catch(error => {
-      console.error('Error fetching event data from Ticketmaster API:', error);
     });
-
+  })
+  .catch(error => {
+    console.error('Error fetching event data from Ticketmaster API:', error);
+  });
+  
   // function createMap() {
+    const createMap = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 37.7749, lng: -122.4194 },
+      zoom: 12
+    });
   // TODO: function to place pings on a map
   // TODO: returns map element with pings
   // TODO: will need to use a map api

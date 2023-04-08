@@ -46,35 +46,39 @@ const eventDisplayPanel = `
                 </div>
                 <div class="panel is-body && has-background-grey-light">
                   <div id="events" class="list-group">
-                    <div class="list-group-item p-4 && has-background-dark && has-text-centered">
+                    <div class="list-group-item p-1 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
-                      <p class="venue"></p>
+                      <p class="venue mb-2"></p>
+                      <br>
                       <button id="btn-1" class="button is-link m-2">Show on Map</button>
                     </div> 
 
-                    <div class="list-group-item p-4 && has-background-dark && has-text-centered">
+                    <div class="list-group-item p-1 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
-                      <p class="venue"></p>
+                      <p class="venue mb-2"></p>
+                      <br>
                       <button id="btn-2" class="button is-link m-2">Show on Map</button>
                     </div>
 
-                    <div class="list-group-item p-4 && has-background-dark && has-text-centered">
+                    <div class="list-group-item p-1 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
-                      <p class="venue"></p>
+                      <p class="venue mb-2"></p>
+                      <br>
                       <button id="btn-3" class="button is-link m-2">Show on Map</button>
                     </div>
 
-                    <div class="list-group-item p-4 && has-background-dark && has-text-centered">
+                    <div class="list-group-item p-1 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
-                      <p class="venue"></p>
+                      <p class="venue mb-2"></p>
+                      <br>
                       <button id="btn-4" class="button is-link m-2">Show on Map</button>
                     </div>
                   </div>
@@ -236,11 +240,11 @@ function showEvents(json) {
             events[i]._embedded.venues[0].city.name
         );
       // attach image of venue to event listing
-      // var img = document.createElement("img");
-      // img.src = events[i]._embedded.venues[0].images[0].url;
-      // img.alt = events[i]._embedded.venues[0].name;
-      // item.append(img);
-      // item.append(document.createElement("br"));
+      var img = document.createElement("img");
+      img.src = events[i]._embedded.venues[0].images[0].url;
+      img.alt = events[i]._embedded.venues[0].name;
+      item.children(".venue").after(img);
+      item.children(".button").after(document.createElement("hr"));
 
       // plot this venue on map
       item.show();

@@ -35,7 +35,7 @@
 
 const apiKey1 = "GYyOSqBcm8hPEAfdpNrM7xPdTb9er8zT";
 const url1 = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}`;
-// TODO: maybe re-style with bulma?
+
 const eventDisplayPanel = `
 <div class="container is-fluid" id="resultsContainer">
           <div class="row">
@@ -46,47 +46,24 @@ const eventDisplayPanel = `
                 </div>
                 <div class="panel is-body && has-background-grey-light">
                   <div id="events" class="list-group">
-                    <div class="list-group-item pt-4 && p-1 && has-background-dark && has-text-centered">
-                      <h4 class="list-group-item-heading"></h4>
-                      <p class="list-group-item-text pr-2">
-                      </p>
-                      <p class="venue mb-2"></p>
-                      <br>
-                      <button id="btn-1" class="button is-link m-2">Show on Map</button>
-                    </div> 
 
-                    <div class="list-group-item p-1 && has-background-dark && has-text-centered">
-                      <h4 class="list-group-item-heading"></h4>
-                      <p class="list-group-item-text pr-2">
-                      </p>
-                      <p class="venue mb-2"></p>
-                      <br>
-                      <button id="btn-2" class="button is-link m-2">Show on Map</button>
-                    </div>
-
-                    <div class="list-group-item p-1 && has-background-dark && has-text-centered">
-                      <h4 class="list-group-item-heading"></h4>
-                      <p class="list-group-item-text pr-2">
-                      </p>
-                      <p class="venue mb-2"></p>
-                      <br>
-                      <button id="btn-3" class="button is-link m-2">Show on Map</button>
-                    </div>
-
-                    <div class="list-group-item p-1 && has-background-dark && has-text-centered">
-                      <h4 class="list-group-item-heading"></h4>
-                      <p class="list-group-item-text pr-2">
-                      </p>
-                      <p class="venue mb-2"></p>
-                      <br>
-                      <button id="btn-4" class="button is-link m-2">Show on Map</button>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+`;
+
+const listGroupItem = `
+<div class="list-group-item pt-4 && p-1 && has-background-dark && has-text-centered">
+  <h4 class="list-group-item-heading"></h4>
+  <p class="list-group-item-text pr-2">
+  </p>
+  <p class="venue mb-2"></p>
+  <br>
+  <button class="button && is-link && m-2 && has-text-white"><a href="#map">Show on Map</a></button>
+</div>
 `;
 
 $(function () {
@@ -122,7 +99,6 @@ const radius = document.getElementById("myRadius");
 const datepickerFrom = document.getElementById("datepickerFrom");
 const datepickerUntil = document.getElementById("datepickerUntil");
 
-
 clearBtn.addEventListener("click", () => {
   //Clears the input fields' values
   searchBox.value = "";
@@ -150,14 +126,14 @@ function showRecentSearches() {
 // return json with (element id, value) pairs
 function getValues() {
   // TODO: user input validation (no past dates, no letters in radius, etc.)
-  const datetimeFrom = new Date ($("#datepickerFrom").val());
-  const datetimeUntil = new Date ($("#datepickerUntil").val());
+  const datetimeFrom = new Date($("#datepickerFrom").val());
+  const datetimeUntil = new Date($("#datepickerUntil").val());
   var searchTerm = $("#search").val();
   var stateCode = $("#stateCode").val();
   var radius = $("#myRadius").val();
   var dateRange = {
-    from: datetimeFrom.toISOString().split('T')[0].concat('T12:00:00Z'),
-    until: datetimeUntil.toISOString().split('T')[0].concat('T23:59:00Z'),
+    from: datetimeFrom.toISOString().split("T")[0].concat("T12:00:00Z"),
+    until: datetimeUntil.toISOString().split("T")[0].concat("T23:59:00Z"),
   };
   return {
     search: searchTerm,
@@ -183,8 +159,6 @@ function getEvents(page = 0) {
     }
   }
 
-  // DEBUG: entering a zipCode results in "TypeError: json._embedded is undefined"
-  // DEBUG: pointing to reference in showEvents()
   // iterate entered parameters and add to request url (remember & before each)
   var queryParams = "";
   for (const [key, value] of Object.entries(userParams)) {
@@ -194,20 +168,16 @@ function getEvents(page = 0) {
     } else if (key === "stateCode" && value !== "") {
       queryParams += `&stateCode=${value}`;
     }
-    // FIXME: THIS DOESN'T WORK
-    //   else if (key === "myRadius" && value !== "") {
-    //   queryParams += `&radius=${value}`;
-    // }
     // NOTE: datepicker value is json w/ from and until keys
     // TODO: implement date range selection
-      else if (key === "datepicker" && value !== "") {
-        queryParams += `&startDateTime=${value.from}`;
-        queryParams += `&endDateTime=${value.until}`;
-      }
+    else if (key === "datepicker" && value !== "") {
+      queryParams += `&startDateTime=${value.from}`;
+      queryParams += `&endDateTime=${value.until}`;
+    }
   }
 
   let queryUrl =
-    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&locale=*&size=4&page=` +
+    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&locale=*&size=20&page=` +
     page;
 
   $.ajax({
@@ -226,12 +196,15 @@ function getEvents(page = 0) {
 }
 
 function showEvents(json) {
-  var items = $("#events .list-group-item");
-  items.hide();
+  // add a list-group-item for each event in events
   var events = json._embedded.events;
+  for (let i = 0; i < events.length; i++) {
+    $("#events").append(listGroupItem);
+  }
+  var items = $("#events .list-group-item");
   var item = items.first();
   // iterate events and fill out event results card
-  for (let i = 0; i < events.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     item.children(".list-group-item-heading").text(events[i].name);
     item
       .children(".list-group-item-text")
@@ -245,17 +218,17 @@ function showEvents(json) {
             events[i]._embedded.venues[0].city.name
         );
       // attach image of venue to event listing
-      // var img = document.createElement("img");
-      // img.src = events[i]._embedded.venues[0].images[0].url;
-      // img.alt = events[i]._embedded.venues[0].name;
-      // item.children(".venue").after(img);
+      if (events[i]._embedded.venues[0].images) {
+        var img = document.createElement("img");
+        img.src = events[i]._embedded.venues[0].images[0].url;
+        img.alt = events[i]._embedded.venues[0].name;
+        img.style = "width: 50%;";
+        item.children(".venue").after(img);
+      }
       item.children(".button").after(document.createElement("hr"));
 
       // plot this venue on map
-      item.show();
-      item.off("click");
-      // var thisButton = item.children("button");
-      item.click(events[i], function (eventObject) {
+      item.children(".button").click(events[i], function (eventObject) {
         console.log(eventObject.data);
         plotEvent(events[i]);
         // try {

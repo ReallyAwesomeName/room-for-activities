@@ -46,7 +46,7 @@ const eventDisplayPanel = `
                 </div>
                 <div class="panel is-body && has-background-grey-light">
                   <div id="events" class="list-group">
-                    <div class="list-group-item p-1 && has-background-dark && has-text-centered">
+                    <div class="list-group-item pt-4 && p-1 && has-background-dark && has-text-centered">
                       <h4 class="list-group-item-heading"></h4>
                       <p class="list-group-item-text pr-2">
                       </p>
@@ -117,15 +117,16 @@ const clearBtn = document.getElementById("btnAdd");
 
 //Input field that needs to be cleared
 const searchBox = document.getElementById("search");
-const zipCode = document.getElementById("zipCode");
+const stateCode = document.getElementById("stateCode");
 const radius = document.getElementById("myRadius");
 const datepickerFrom = document.getElementById("datepickerFrom");
 const datepickerUntil = document.getElementById("datepickerUntil");
 
+
 clearBtn.addEventListener("click", () => {
   //Clears the input fields' values
   searchBox.value = "";
-  zipCode.value = "";
+  stateCode.value = "";
   radius.value = "";
   datepickerFrom.value = "";
   datepickerUntil.value = "";
@@ -149,16 +150,18 @@ function showRecentSearches() {
 // return json with (element id, value) pairs
 function getValues() {
   // TODO: user input validation (no past dates, no letters in radius, etc.)
+  const datetimeFrom = new Date ($("#datepickerFrom").val());
+  const datetimeUntil = new Date ($("#datepickerUntil").val());
   var searchTerm = $("#search").val();
-  var zipCode = $("#zipCode").val();
+  var stateCode = $("#stateCode").val();
   var radius = $("#myRadius").val();
   var dateRange = {
-    from: $("#datepickerFrom").val(),
-    until: $("#datepickerUntil").val(),
+    from: datetimeFrom.toISOString().split('T')[0].concat('T12:00:00Z'),
+    until: datetimeUntil.toISOString().split('T')[0].concat('T23:59:00Z'),
   };
   return {
     search: searchTerm,
-    zipCode: zipCode,
+    stateCode: stateCode,
     myRadius: radius,
     datepicker: dateRange,
   };
@@ -188,8 +191,8 @@ function getEvents(page = 0) {
     console.log(key, value);
     if (key === "search" && value !== "") {
       queryParams += `&keyword=${value}`;
-    } else if (key === "zipCode" && value !== "") {
-      queryParams += `&postalCode=${value}`;
+    } else if (key === "stateCode" && value !== "") {
+      queryParams += `&stateCode=${value}`;
     }
     // FIXME: THIS DOESN'T WORK
     //   else if (key === "myRadius" && value !== "") {
@@ -197,12 +200,14 @@ function getEvents(page = 0) {
     // }
     // NOTE: datepicker value is json w/ from and until keys
     // TODO: implement date range selection
-    //   else if (key === "datepicker" && value) {
-    //   }
+      else if (key === "datepicker" && value !== "") {
+        queryParams += `&startDateTime=${value.from}`;
+        queryParams += `&endDateTime=${value.until}`;
+      }
   }
 
   let queryUrl =
-    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&dmaId=200&size=4&page=` +
+    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey1}${queryParams}&locale=*&size=4&page=` +
     page;
 
   $.ajax({
@@ -240,10 +245,10 @@ function showEvents(json) {
             events[i]._embedded.venues[0].city.name
         );
       // attach image of venue to event listing
-      var img = document.createElement("img");
-      img.src = events[i]._embedded.venues[0].images[0].url;
-      img.alt = events[i]._embedded.venues[0].name;
-      item.children(".venue").after(img);
+      // var img = document.createElement("img");
+      // img.src = events[i]._embedded.venues[0].images[0].url;
+      // img.alt = events[i]._embedded.venues[0].name;
+      // item.children(".venue").after(img);
       item.children(".button").after(document.createElement("hr"));
 
       // plot this venue on map

@@ -20,10 +20,10 @@ div.columns, input.input {
 } */
 body {
   background-color: black;
-  
 }
 
-.hero, .footer {
+.hero,
+.footer {
   font-size: 1em;
   font-family: "Alegreya Sans SC", Calibri, "Trebuchet MS", sans-serif;
   color: white;
@@ -38,9 +38,29 @@ label {
 }
 
 .is-my-color {
-  background-color: #6F000A !important;
+  background-color: #6f000a !important;
 }
 
 a {
   color: white;
+}
+
+#results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#map {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  margin: 2rem 0 2rem 0;
+  max-height: 50rem;
+}
+
+@media screen and (max-width: 768px) {
+  #results {
+    display: flex;
+    flex-direction: column;
+  }
 }

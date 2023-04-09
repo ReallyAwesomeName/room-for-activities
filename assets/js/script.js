@@ -99,7 +99,6 @@ const clearBtn = document.getElementById("btnAdd");
 //Input field that needs to be cleared
 const searchBox = document.getElementById("search");
 const stateCode = document.getElementById("stateCode");
-const radius = document.getElementById("myRadius");
 const datepickerFrom = document.getElementById("datepickerFrom");
 const datepickerUntil = document.getElementById("datepickerUntil");
 
@@ -107,7 +106,6 @@ clearBtn.addEventListener("click", () => {
   //Clears the input fields' values
   searchBox.value = "";
   stateCode.value = "";
-  radius.value = "";
   datepickerFrom.value = "";
   datepickerUntil.value = "";
 });
@@ -144,7 +142,6 @@ function getValues() {
   const datetimeUntil = new Date($("#datepickerUntil").val());
   var searchTerm = $("#search").val();
   var stateCode = $("#stateCode").val();
-  var radius = $("#myRadius").val();
   var dateRange = {
     from: datetimeFrom.toISOString().split("T")[0].concat("T12:00:00Z"),
     until: datetimeUntil.toISOString().split("T")[0].concat("T23:59:00Z"),
@@ -152,7 +149,6 @@ function getValues() {
   return {
     search: searchTerm,
     stateCode: stateCode,
-    myRadius: radius,
     datepicker: dateRange,
   };
 }

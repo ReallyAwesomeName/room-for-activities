@@ -1,5 +1,6 @@
 body {
   background-color: black;
+  min-height: min-content;
 }
 
 .hero,
@@ -35,7 +36,6 @@ a {
   flex-direction: column;
   justify-content: right;
   margin: 2rem 0 2rem 0;
-  min-height: 30rem;
   max-height: 50rem;
 }
 
@@ -53,6 +53,6 @@ a {
 @media screen and (max-width: 1024px) {
   #map,
   #results {
-    margin: 4vw;
+    margin: 4vw;    
   }
 }

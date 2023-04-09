@@ -90,6 +90,7 @@ $("#btnSearch").on("click", function (event) {
   getEvents();
   // display results
   $(eventDisplayPanel).prependTo("#results");
+  $("#map").css("min-height", "30rem")
   saveRecentSearch();
 });
 

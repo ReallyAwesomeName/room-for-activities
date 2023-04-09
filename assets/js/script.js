@@ -65,6 +65,8 @@ const listGroupItem = `
 </div>
 `;
 
+var storageCounter = 0;
+
 $(function () {
   $("#datepickerFrom").datepicker();
 });
@@ -114,25 +116,24 @@ function saveRecentSearch() {
   var thisSearch = getValues().search;
   if (!Object.values(localStorage).includes(thisSearch)) {
     // TODO: add max length too
-    localStorage.setItem(`activitySearch${localStorage.length}`, thisSearch);
+    if (storageCounter < 10) {
+      localStorage.setItem(`activitySearch${storageCounter}`, thisSearch);
+      storageCounter++;
+    } else {
+      localStorage.setItem(`activitySearch${0}`, thisSearch);
+      storageCounter = 1;
+    }
   }
 }
 
 function showRecentSearches() {
   document.getElementById("previousSearches").innerHTML = "";
-  let reverseStorage = [];
-  for (let [key, value] of Object.entries(localStorage)) {
-    if (key.includes("activitySearch")) {
-      reverseStorage.push(value);
+  Object.entries(localStorage).forEach((search) => {
+    if (search[0].includes("activitySearch")) {
+      console.log(search);
+      $("#previousSearches").append(`<option value = ${search[1]}></option>`);
     }
-  }
-  reverseStorage = reverseStorage.reverse();
-  for (const [key, value] of reverseStorage.slice((end = 10))) {
-    if (key.includes("activitySearch")) {
-      console.log(`key: ${key},`, value);
-      $("#previousSearches").append(`<option value = ${value}></option>`);
-    }
-  }
+  });
 }
 
 // get values from the form

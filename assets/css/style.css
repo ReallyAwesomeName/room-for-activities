@@ -39,6 +39,10 @@ a {
   max-height: 50rem;
 }
 
+#searchInputs {
+  margin: 0 3vw;
+}
+
 @media screen and (max-width: 768px) {
   #results {
     display: flex;

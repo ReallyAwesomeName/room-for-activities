@@ -46,8 +46,7 @@ const eventDisplayPanel = `
                 </div>
                 <div class="panel is-body && has-background-grey-light">
                   <div id="events" class="list-group">
-
-                  </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -73,6 +72,10 @@ $(function () {
   $("#datepickerUntil").datepicker();
 });
 
+$("#search").on("click", function () {
+  showRecentSearches();
+});
+
 // NOTE: search click function is essentially the driver code
 // buttons
 $("#btnSearch").on("click", function (event) {
@@ -86,7 +89,6 @@ $("#btnSearch").on("click", function (event) {
   // display results
   $(eventDisplayPanel).prependTo("#results");
   saveRecentSearch();
-  showRecentSearches();
 });
 
 //"Clear" button element by its ID
@@ -110,11 +112,22 @@ clearBtn.addEventListener("click", () => {
 
 function saveRecentSearch() {
   var thisSearch = getValues().search;
-  localStorage.setItem(`activitySearch${localStorage.length}`, thisSearch);
+  if (!Object.values(localStorage).includes(thisSearch)) {
+    // TODO: add max length too
+    localStorage.setItem(`activitySearch${localStorage.length}`, thisSearch);
+  }
 }
 
 function showRecentSearches() {
-  for (const [key, value] of Object.entries(localStorage)) {
+  document.getElementById("previousSearches").innerHTML = "";
+  let reverseStorage = [];
+  for (let [key, value] of Object.entries(localStorage)) {
+    if (key.includes("activitySearch")) {
+      reverseStorage.push(value);
+    }
+  }
+  reverseStorage = reverseStorage.reverse();
+  for (const [key, value] of reverseStorage.slice((end = 10))) {
     if (key.includes("activitySearch")) {
       console.log(`key: ${key},`, value);
       $("#previousSearches").append(`<option value = ${value}></option>`);
@@ -169,7 +182,6 @@ function getEvents(page = 0) {
       queryParams += `&stateCode=${value}`;
     }
     // NOTE: datepicker value is json w/ from and until keys
-    // TODO: implement date range selection
     else if (key === "datepicker" && value !== "") {
       queryParams += `&startDateTime=${value.from}`;
       queryParams += `&endDateTime=${value.until}`;
@@ -218,13 +230,13 @@ function showEvents(json) {
             events[i]._embedded.venues[0].city.name
         );
       // attach image of venue to event listing
-      if (events[i]._embedded.venues[0].images) {
-        var img = document.createElement("img");
-        img.src = events[i]._embedded.venues[0].images[0].url;
-        img.alt = events[i]._embedded.venues[0].name;
-        img.style = "width: 50%;";
-        item.children(".venue").after(img);
-      }
+      // if (events[i]._embedded.venues[0].images) {
+      //   var img = document.createElement("img");
+      //   img.src = events[i]._embedded.venues[0].images[0].url;
+      //   img.alt = events[i]._embedded.venues[0].name;
+      //   img.style = "width: 50%;";
+      //   item.children(".venue").after(img);
+      // }
       item.children(".button").after(document.createElement("hr"));
 
       // plot this venue on map
@@ -270,9 +282,10 @@ async function plotEvent(thisEvent) {
     title: thisEvent._embedded.venues[0].name,
   });
   // add listener to marker linking to ticketmaster page
-  marker.addListener("click", function () {
-    window.open(thisEvent._embedded.venues[0].url, "_blank");
-  });
+  if (thisEvent.url) {
+    marker.addListener("click", function () {
+      window.open(thisEvent.url);
+      // window.open(thisEvent._embedded.venues[0].url, "_blank");
+    });
+  }
 }
-
-// const apiKey2 = "AIzaSyCY1bmueAYidVBIvqA4GkRWpNYkfSBWiTQ";

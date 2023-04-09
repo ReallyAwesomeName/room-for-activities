@@ -1,23 +1,3 @@
-/* * {
-  --background-color-primary: rgb(52, 52, 52);
-  --background-color-secondary: rgb(43, 43, 43);
-  --color-primary: rgb(221, 221, 221);
-  --color-secondary: rgb(190, 190, 190);
-  --highlight-primary: rgb(0, 101, 114);
-}
-
-html, body {
-  background-color: var(--background-color-primary);
-  color: var(--color-primary);
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-div.columns, input.input {
-  background-color: var(--background-color-primary);
-  color: var(--color-primary);
-} */
 body {
   background-color: black;
 }
@@ -55,6 +35,7 @@ a {
   flex-direction: column;
   justify-content: right;
   margin: 2rem 0 2rem 0;
+  min-height: 30rem;
   max-height: 50rem;
 }
 
@@ -62,5 +43,12 @@ a {
   #results {
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #map,
+  #results {
+    margin: 4vw;
   }
 }

@@ -1,6 +1,10 @@
 body {
   background-color: black;
-  min-height: min-content;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
 }
 
 .hero,
@@ -53,6 +57,6 @@ a {
 @media screen and (max-width: 1024px) {
   #map,
   #results {
-    margin: 4vw;    
+    margin: 4vw;
   }
 }

@@ -14,9 +14,33 @@ body {
   color: white;
 }
 
-#radiusMiles {
-  color: white;
+.hero {
+  background-color: #000000;
+  background-image: linear-gradient(326deg, #000000 0%, #6f000a 74%);
 }
+
+.hero-body {
+  text-align: center
+}
+
+.headerImage {
+  display: inline-flex
+}
+
+.headerPic {
+  width: 25%
+}
+
+#datepickerFrom, #datepickerUntil {
+  max-width: 8rem;
+}
+
+#btnSearch, #btnAdd {
+  margin: 1rem;
+}
+/* #radiusMiles {
+  color: white;
+} */
 
 label {
   font-size: 25px;
@@ -45,6 +69,12 @@ a {
 
 #searchInputs {
   margin: 0 3vw;
+}
+
+.footer {
+  background-color: #000000;
+        background-image: linear-gradient(326deg, #000000 0%, #6f000a 74%);
+        color: white;
 }
 
 @media screen and (max-width: 768px) {

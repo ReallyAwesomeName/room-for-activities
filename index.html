@@ -23,12 +23,8 @@
   <body>
     <section
       class="hero is-primary"
-      style="
-        background-color: #000000;
-        background-image: linear-gradient(326deg, #000000 0%, #6f000a 74%);
-      "
     >
-      <div class="hero-body" style="text-align: center">
+      <div class="hero-body">
         <p class="title">Sights & Sounds</p>
         <!-- TODO: don't forget this placeholder -->
         <p class="subtitle">
@@ -37,30 +33,31 @@
       </div>
     </section>
     <main class="container">
-      <div class="headerImage" style="display: inline-flex">
+      <div class="headerImage">
         <img
           id="header1"
+          class="headerPic"
           src="assets\images\concert1.jpg"
           alt="concert"
-          style="width: 25%"
+          
         />
         <img
           id="header2"
+          class="headerPic"
           src="assets\images\sport1.jpg"
           alt="sports-event"
-          style="width: 25%"
         />
         <img
           id="header3"
+          class="headerPic"
           src="assets\images\standup.jpg"
           alt="standup-comedy"
-          style="width: 25%"
         />
         <img
           id="header4"
+          class="headerPic"
           src="assets\images\theater.jpg"
           alt="theater-venue"
-          style="width: 25%"
         />
       </div>
 
@@ -88,7 +85,6 @@
             type="text"
             class="input"
             id="datepickerFrom"
-            style="max-width: 8rem"
             placeholder="from date"
           />
         </div>
@@ -97,7 +93,6 @@
             type="text"
             class="input"
             id="datepickerUntil"
-            style="max-width: 8rem"
             placeholder="until date"
           />
         </div>
@@ -106,14 +101,12 @@
         <button
           class="button is-dark is-rounded"
           id="btnSearch"
-          style="margin: 1rem"
         >
           Search
         </button>
         <button
           class="button is-dark is-rounded"
           id="btnAdd"
-          style="margin: 1rem"
         >
           Clear
         </button>
@@ -125,11 +118,6 @@
 
     <footer
       class="footer"
-      style="
-        background-color: #000000;
-        background-image: linear-gradient(326deg, #000000 0%, #6f000a 74%);
-        color: white;
-      "
     >
       <div class="content has-text-centered">
         <p>

@@ -129,7 +129,6 @@ function showRecentSearches() {
   document.getElementById("previousSearches").innerHTML = "";
   Object.entries(localStorage).forEach((search) => {
     if (search[0].includes("activitySearch")) {
-      console.log(search);
       $("#previousSearches").append(`<option value = ${search[1]}></option>`);
     }
   });
@@ -173,7 +172,6 @@ function getEvents(page = 0) {
   // iterate entered parameters and add to request url (remember & before each)
   var queryParams = "";
   for (const [key, value] of Object.entries(userParams)) {
-    console.log(key, value);
     if (key === "search" && value !== "") {
       queryParams += `&keyword=${value}`;
     } else if (key === "stateCode" && value !== "") {
@@ -199,8 +197,7 @@ function getEvents(page = 0) {
       getEvents.json = json;
       showEvents(json);
     },
-    error: function (xhr, status, err) {
-      console.log(err);
+    error: function (xhr, status, err) { 
     },
   });
 }
@@ -239,16 +236,13 @@ function showEvents(json) {
 
       // plot this venue on map
       item.children(".button").click(events[i], function (eventObject) {
-        console.log(eventObject.data);
         plotEvent(events[i]);
         // try {
         //   getAttraction(eventObject.data._embedded.attractions[0].id);
         // } catch (err) {
-        //   console.log(err);
         // }
       });
     } catch (err) {
-      console.log(err);
     }
     item = item.next();
   }
@@ -256,9 +250,7 @@ function showEvents(json) {
 
 async function plotEvent(thisEvent) {
   // plot this venue on map
-  console.log(
     typeof parseFloat(thisEvent._embedded.venues[0].location.latitude)
-  );
   // var mapDiv = $("#map");
   // target map div and initialize map in it, centered on thisEvent
   var mapDiv = document.getElementById("map");
